@@ -4,8 +4,11 @@
   height: 100%
   top: 0
   left: 0
-  z-index: 1500
+  z-index: 2080
   background-color: rgba(0, 0, 0, 0.3)
+  +mobile() {
+    display: none;
+  }
 
 .algolia-popup
   overflow: hidden
@@ -19,7 +22,7 @@
   margin-left: -350px
   background: #fff
   color: #333
-  z-index: 2000
+  z-index: 9999
   border-radius: 5px
   +mobile()
     padding: 0
@@ -104,6 +107,8 @@
   display: block
   border-bottom: 1px dashed #ccc
   the-transition()
+  em
+    color: #F59292
 
 .algolia-pagination
   .pagination

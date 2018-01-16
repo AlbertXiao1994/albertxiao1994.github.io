@@ -1,11 +1,12 @@
 .site-overview {
-  position: absolute;
-  top: 150px;
-  width: 100%;
-  margin: auto;
   color: $grey-dark;
   text-align: center;
   overflow: hidden;
+  +desktop() {
+    position: absolute;
+    top: 150px;
+    width: 100%;
+  }
   @media screen and (max-width: 991px) {
     display: none;
   }
