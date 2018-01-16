@@ -1,0 +1,39 @@
+.site-nav-toggle {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  +mobile() {
+    display: block;
+  }
+  +tablet() {
+    display: block;
+  }
+
+  button {
+    margin-top: 2px;
+    padding: 9px 10px;
+    background: transparent;
+    border: none;
+  }
+}
+
+.site-nav {
+  @media screen and (max-width: 991px) {
+    display: none;
+    margin: 0 -10px;
+    padding: 0 10px;
+    clear: both;
+    border-top: 1px solid $gray-lighter;
+  }
+  +desktop() {
+    display: block !important;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 70px;
+    z-index: 2500;
+    background: rgba(255,255,255,0.6);
+ }
+}
