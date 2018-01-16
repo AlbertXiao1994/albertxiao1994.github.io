@@ -23,7 +23,8 @@ $(document).ready(function () {
     var animateAction = isSiteNavOn ? 'slideUp' : 'slideDown';
     var animateCallback = isSiteNavOn ? 'removeClass' : 'addClass';
     var $navDimmer = $('.nav-dimmer');
-    var $overview = $('.site-overview-mobile')
+    var $overview = $('.site-overview-mobile');
+    var $body = $('body');
 
     $siteNav.stop()[animateAction]('fast', function () {
       $siteNav[animateCallback](ON_CLASS_NAME);
@@ -31,15 +32,18 @@ $(document).ready(function () {
 
     $navDimmer.css({'display':"block"});
     $overview.css({'display':"block"});
+    $body.css({'overflow':"hidden"});
   });
 
   $('.nav-dimmer .nav-close').on('click', function () {
     var $siteNav = $('.site-nav');
     var $navDimmer = $('.nav-dimmer');
-    var $overview = $('.site-overview-mobile')
+    var $overview = $('.site-overview-mobile');
+    var $body = $('body');
 
     $navDimmer.css({'display':"none"});
     $overview.css({'display':"none"});
+    $body.css({'overflow':"auto"});
     $('.site-nav-toggle button').trigger('click');
   });
 
