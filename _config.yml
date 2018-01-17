@@ -99,3 +99,14 @@ symbols_count_time:
   time: true
   total_symbols: false
   total_time: false
+
+# Page cover
+cover:
+  home: http://wx2.sinaimg.cn/mw690/a98da548gy1fngfyq6mdqj20zk0k0abu.jpg
+  archives: http://wx3.sinaimg.cn/mw690/a98da548gy1fnk06it5mhj20go0aft9z.jpg
+  #categories: 
+  #tags: 
+  #photo: 
+  #friends: 
+  #follow: 
+  #about:

@@ -1,4 +1,11 @@
-<div class="site-top-wrapper" {% if is_post() and page.cover %} style="background-image:url({{ page.cover }})"{% endif %}>
+{% set cover = config.cover.home %}
+{% if is_post() and page.cover %}
+  {% set cover = page.cover %}
+{% elseif is_archive() %}
+  {% set cover = config.cover.archives %}
+{% endif %}
+
+<div class="site-top-wrapper" style="background-image:url({{ cover }})">
   {% if is_home() %}
       <div class="site-overview">
         <div class="site-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
