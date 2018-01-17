@@ -92,3 +92,10 @@ algolia:
     - slug
     - path
     - content:strip
+    
+# Post wordcount display settings
+symbols_count_time:
+  symbols: true
+  time: true
+  total_symbols: false
+  total_time: false
