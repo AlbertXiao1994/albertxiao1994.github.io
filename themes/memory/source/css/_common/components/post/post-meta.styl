@@ -4,6 +4,7 @@
   font-family: $font-family-posts;
   font-size: 12px;
   text-align: center;
+  line-height: 30px;
 
   .post-category-list {
     display: inline-block;
@@ -19,7 +20,7 @@
 }
 
 .post-wordcount {
-  if !hexo-config('symbols_count_time.separated_meta') { display: inline-block; }
+  display: inline-block;
 }
 
 .post-meta-divider {
@@ -46,4 +47,21 @@
 
 .posts-expand .post-comments-count {
   +mobile() { display: none; }
+}
+
+.post-meta .post-author {
+  margin-right: 10px;
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  img {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+}
+
+.post-meta span {
+  vertical-align: top;
 }

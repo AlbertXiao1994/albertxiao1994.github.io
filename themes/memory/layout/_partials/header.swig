@@ -1,4 +1,4 @@
-<div class="site-top-wrapper">
+<div class="site-top-wrapper" {% if is_post() and page.cover %} style="background-image:url({{ page.cover }})"{% endif %}>
   {% if is_home() %}
       <div class="site-overview">
         <div class="site-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -70,49 +70,29 @@
 
   {% if is_post() %}
     {% if not headlessPost %}
-      <header class="post-header custom-post-detail">
-
+      <div class="post-header custom-post-header">
         {# Not to show title for quote posts that do not have a title #}
-        {% if not (is_index and post.type === 'quote' and not post.title) %}
-          <{% if theme.seo %}h2{% else %}h1{% endif %} class="post-title{% if post.direction && post.direction.toLowerCase() === 'rtl' %} rtl{% endif %}" itemprop="name headline">{#
-          #}{# Link posts #}{#
-          #}{% if post.link %}
-              {% if post.sticky > 0 %}
-                {{ post.sticky }}
-                <span class="post-sticky-flag" title="{{ __('post.sticky') }}">
-                  <i class="fa fa-thumb-tack"></i>
-                </span>
-              {% endif %}
-              <a class="post-title-link post-title-link-external" target="_blank" href="{{ url_for(post.link) }}" itemprop="url">
-                {{ post.title or post.link }}
-                <i class="fa fa-external-link"></i>
-              </a>
-            {% else %}{#
-            #}{% if is_index %}
-                {% if post.sticky > 0 %}
-                  <span class="post-sticky-flag" title="{{ __('post.sticky') }}">
-                    <i class="fa fa-thumb-tack"></i>
-                  </span>
-                {% endif %}
-                <a class="post-title-link" href="{{ url_for(post.path) }}" itemprop="url">{#
-                #}{{ post.title | default(__('post.untitled'))}}{#
-              #}</a>{#
-            #}{% else %}{{ post.title }}{% endif %}{#
-          #}{% endif %}{#
+        {% if not (is_index and page.type === 'quote' and not page.title) %}
+          <{% if theme.seo %}h2{% else %}h1{% endif %} class="post-title{% if post.direction && post.direction.toLowerCase() === 'rtl' %} rtl{% endif %}" itemprop="name headline">{{ page.title }}{#
         #}</{% if theme.seo %}h2{% else %}h1{% endif %}>
         {% endif %}
 
-        <div class="post-meta">
+        <div class="post-meta">      
+          {% if theme.avatar %}
+            <span class="post-author"><img itemprop="image"
+                src="{{ url_for( theme.avatar | default(theme.images + '/avatar.gif') ) }}"
+                alt="{{ theme.author }}" /></span>
+          {% endif %}
           <span class="post-time">
             {% if theme.post_meta.created_at %}
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="fa fa-clock-o"></i>
               </span>
               {% if theme.post_meta.item_text %}
                 <span class="post-meta-item-text">{{ __('post.posted') }}</span>
               {% endif %}
-              <time title="{{ __('post.created') }}" itemprop="dateCreated datePublished" datetime="{{ moment(post.date).format() }}">{#
-              #}{{ date(post.date, config.date_format) }}{#
+              <time title="{{ __('post.created') }}" itemprop="dateCreated datePublished" datetime="{{ moment(page.date).format() }}">{#
+              #}{{ date(page.date, config.date_format) }}{#
             #}</time>
             {% endif %}
 
@@ -125,15 +105,15 @@
                 <i class="fa fa-calendar-check-o"></i>
               </span>
               {% if theme.post_meta.item_text %}
-                <span class="post-meta-item-text">{{ __('post.modified') }}&#58;</span>
+                <span class="post-meta-item-text">{{ __('page.modified') }}&#58;</span>
               {% endif %}
-              <time title="{{ __('post.modified') }}" itemprop="dateModified" datetime="{{ moment(post.updated).format() }}">{#
-              #}{{ date(post.updated, config.date_format) }}{#
+              <time title="{{ __('page.modified') }}" itemprop="dateModified" datetime="{{ moment(page.updated).format() }}">{#
+              #}{{ date(page.updated, config.date_format) }}{#
             #}</time>
             {% endif %}
           </span>
 
-          {% if post.categories and post.categories.length and theme.post_meta.categories %}
+          {% if page.categories and page.categories.length and theme.post_meta.categories %}
             <span class="post-category" >
             {% if theme.post_meta.created_at or theme.post_meta.updated_at %}
               <span class="post-meta-divider">|</span>
@@ -144,7 +124,7 @@
               {% if theme.post_meta.item_text %}
                 <span class="post-meta-item-text">{{ __('post.in') }}</span>
               {% endif %}
-              {% for cat in post.categories %}
+              {% for cat in page.categories %}
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="{{ url_for(cat.path) }}" itemprop="url" rel="index">
                     <span itemprop="name">{{ cat.name }}</span>
@@ -161,40 +141,32 @@
 
           {# LeanCould PageView #}
           {% if theme.leancloud_visitors.enable %}
-             <span id="{{ url_for(post.path) }}" class="leancloud_visitors" data-flag-title="{{ post.title }}">
+             <span id="{{ url_for(post.path) }}" class="leancloud_visitors" data-flag-title="{{ page.title }}">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
                </span>
-               {% if theme.post_meta.item_text %}
-                 <span class="post-meta-item-text">{{__('post.visitors')}}&#58;</span>
-               {% endif %}
-                 <span class="leancloud-visitors-count"></span>
+               <span class="leancloud-visitors-count"></span>
+               <span class="post-meta-item-text">次阅读</span>
              </span>
           {% endif %}
 
           {% if config.symbols_count_time.symbols or config.symbols_count_time.time %}
-            <div class="post-wordcount">
-              {% if not theme.symbols_count_time.separated_meta %}
-                <span class="post-meta-divider">|</span>
-              {% endif %}
-
+            <span class="post-wordcount">
+              <span class="post-meta-divider">|</span>
               {% if config.symbols_count_time.symbols %}
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="fa fa-pencil"></i>
                 </span>
-                {% if theme.symbols_count_time.item_text_post %}
-                  <span class="post-meta-item-text">{{ __('post.wordcount') }}&#58;</span>
-                {% endif %}
                 <span title="{{ __('post.wordcount') }}">{#
-                #}{{ symbolsCount(post.content) }}{#
-              #}</span>
+                #}{{ symbolsCount(page.content) }}{#
+              #}</span><span class="post-meta-item-text">字</span>
               {% endif %}
-            </div>
+            </span>
           {% endif %}
 
         </div>
-      </header>
+      </div>
     {% endif %}
   {% endif %}
 </div>

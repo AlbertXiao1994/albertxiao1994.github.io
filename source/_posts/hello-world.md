@@ -1,5 +1,10 @@
 ---
 title: Hello World
+tags: 
+- hello
+categories:
+- Sports
+cover: http://wx3.sinaimg.cn/mw690/a98da548gy1fnk06it5mhj20go0aft9z.jpg
 ---
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 

@@ -31,8 +31,8 @@
       <meta itemprop="name" content="{{ config.title }}">
     </span>
 
-    {% if not headlessPost %}
-      <header class="post-header custom-post-detail">
+    {% if not headlessPost and is_home() %}
+      <header class="post-header">
 
         {# Not to show title for quote posts that do not have a title #}
         {% if not (is_index and post.type === 'quote' and not post.title) %}
@@ -68,11 +68,8 @@
           <span class="post-time">
             {% if theme.post_meta.created_at %}
               <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
+                <i class="fa fa-clock-o"></i>
               </span>
-              {% if theme.post_meta.item_text %}
-                <span class="post-meta-item-text">{{ __('post.posted') }}</span>
-              {% endif %}
               <time title="{{ __('post.created') }}" itemprop="dateCreated datePublished" datetime="{{ moment(post.date).format() }}">{#
               #}{{ date(post.date, config.date_format) }}{#
             #}</time>
@@ -86,9 +83,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-check-o"></i>
               </span>
-              {% if theme.post_meta.item_text %}
-                <span class="post-meta-item-text">{{ __('post.modified') }}&#58;</span>
-              {% endif %}
               <time title="{{ __('post.modified') }}" itemprop="dateModified" datetime="{{ moment(post.updated).format() }}">{#
               #}{{ date(post.updated, config.date_format) }}{#
             #}</time>
@@ -103,9 +97,6 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              {% if theme.post_meta.item_text %}
-                <span class="post-meta-item-text">{{ __('post.in') }}</span>
-              {% endif %}
               {% for cat in post.categories %}
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="{{ url_for(cat.path) }}" itemprop="url" rel="index">
@@ -128,31 +119,22 @@
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
                </span>
-               {% if theme.post_meta.item_text %}
-                 <span class="post-meta-item-text">{{__('post.visitors')}}&#58;</span>
-               {% endif %}
-                 <span class="leancloud-visitors-count"></span>
+               <span class="leancloud-visitors-count"></span>
              </span>
           {% endif %}
 
           {% if config.symbols_count_time.symbols or config.symbols_count_time.time %}
-            <div class="post-wordcount">
-              {% if not theme.symbols_count_time.separated_meta %}
-                <span class="post-meta-divider">|</span>
-              {% endif %}
-
+            <span class="post-wordcount">
+              <span class="post-meta-divider">|</span>
               {% if config.symbols_count_time.symbols %}
                 <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
+                  <i class="fa fa-pencil"></i>
                 </span>
-                {% if theme.symbols_count_time.item_text_post %}
-                  <span class="post-meta-item-text">{{ __('post.wordcount') }}&#58;</span>
-                {% endif %}
                 <span title="{{ __('post.wordcount') }}">{#
                 #}{{ symbolsCount(post.content) }}{#
-              #}</span>
+              #}
               {% endif %}
-            </div>
+            </span>
           {% endif %}
 
         </div>
@@ -249,8 +231,9 @@
     <footer class="post-footer">
       {% if post.tags and post.tags.length and not is_index %}
         <div class="post-tags">
+          <i class="fa fa-fw fa-tags"></i>
           {% for tag in post.tags %}
-            <a href="{{ url_for(tag.path) }}" rel="tag"># {{ tag.name }}</a>
+            <a href="{{ url_for(tag.path) }}" rel="tag"> {{ tag.name }}</a>
           {% endfor %}
         </div>
       {% endif %}

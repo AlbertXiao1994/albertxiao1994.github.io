@@ -248,9 +248,9 @@ symbols_count_time:
   #description: ex. subscribe to my blog by scanning my public wechat account
 
 # Reward
-#reward_comment: Donate comment here
-#wechatpay: /images/wechatpay.jpg
-#alipay: /images/alipay.jpg
+#reward_comment:
+wechatpay: http://wx1.sinaimg.cn/mw690/a98da548gy1fnjyj1j9xkj206v06xjrs.jpg
+alipay: http://wx4.sinaimg.cn/mw690/a98da548gy1fnjyj7gs7ij207907674q.jpg
 #bitcoin: /images/bitcoin.png
 
 # Declare license on posts
