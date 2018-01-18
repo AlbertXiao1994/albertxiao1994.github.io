@@ -52,9 +52,9 @@
 
 .post-block-home {
   box-shadow: 0 0 10px rgba(202,203,203,.6);
-  height: 250px;
   border-radius: 10px;
   +desktop() {
+    height: 250px;
     padding: 30px;
   }
   +tablet() {
@@ -66,56 +66,102 @@
 }
 
 .post-block-home .post-sub-content {
-  width: 45%;
   box-sizing: border-box;
+  +desktop() {
+    width: 45%;
+  }
+  +mobile() {
+    width: 100%;
+    padding: 20px;
+  }
   .post-title {
     margin-top: 0;
+    font-weight: 700;
+    +mobile() {
+      text-align: left;
+    }
   }
   .post-meta {
     margin-bottom: 10px;
+    +mobile() {
+      text-align: left;
+    }
+  }
+  .post-button {
+    +mobile() {
+      display: none;
+    }
   }
 }
 
 .custom-post:nth-child(odd) {
   .post-sub-content {
-    float: right;
-    padding-left: 30px;
+    +desktop() {
+      float: right;
+      padding-left: 30px;
+    }
+    +tablet() {
+      float: right;
+      padding-left: 30px;
+    }
   }
   .post-sub-img {
-    float: left;
+    +desktop() {
+      float: left;
+    }
+    +tablet() {
+      float: left;
+    }
   }
-  .post-button {
-    text-align: right
-  }
-  .post-title {
-    text-align: right;
-  }
-  .post-meta {
-    text-align: right;
+  .post-button, .post-title, .post-meta {
+    +desktop() {
+      text-align: right;
+    }
+    +tablet() {
+      text-align: right;
+    }
   }
 }
 
 .custom-post:nth-child(even) {
   .post-sub-content {
-    float: left;
-    padding-right: 30px;
+    +desktop() {
+      float: left;
+      padding-right: 30px;
+    }
+    +tablet() {
+      float: left;
+      padding-right: 30px;
+    }
   }
   .post-sub-img {
-    float: right;
+    +desktop() {
+      float: right;
+    }
+    +tablet() {
+      float: right;
+    }
   }
-  .post-button {
-    text-align: left
-  }
-  .post-title {
-    text-align: left;
-  }
-  .post-meta {
-    text-align: left;
+  .post-button, .post-title, .post-meta {
+    +desktop() {
+      text-align: left;
+    }
+    +tablet() {
+      text-align: left;
+    }
   }
 }
 
 .post-block-home .post-sub-img {
-  width: 55%;
+  +desktop() {
+    width: 55%;
+  }
+  +tablet() {
+    width: 55%;
+  }
+  +mobile() {
+    width: 100%;
+  }
   .post-img-link {
     display: block;
     border-radius: 10px;

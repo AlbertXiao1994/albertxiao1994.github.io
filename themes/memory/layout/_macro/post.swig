@@ -31,6 +31,12 @@
       <meta itemprop="name" content="{{ config.title }}">
     </span>
 
+    {% if is_home() %}
+      <div class="post-sub-img">
+        <a class="post-img-link" href="{{ url_for(post.path) }}" style="background-image:url({{ post.cover }})"></a>
+      </div>
+    {% endif %}
+
     {###post subgest content###}
     {% if is_home() %}<div class="post-sub-content">{% endif %}
 
@@ -215,12 +221,6 @@
 
     {% if is_home() %}</div>{% endif %}
     {###post subgest content end###}
-
-    {% if is_home() %}
-      <div class="post-sub-img">
-        <a class="post-img-link" href="{{ url_for(post.path) }}" style="background-image:url(post.cover)"></a>
-      </div>
-    {% endif %}
 
     {% if theme.wechat_subscriber.enabled and not is_index %}
       <div>
