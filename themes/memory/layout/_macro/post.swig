@@ -14,11 +14,11 @@
     <div class="reading-progress-bar"></div>
   {% endif %}
 
-  <article class="{{ post_class }}" itemscope itemtype="http://schema.org/Article">
+  <article class="{{ post_class }}{% if is_home() %} custom-post{% endif %}" itemscope itemtype="http://schema.org/Article">
   {##################}
   {### POST BLOCK ###}
   {##################}
-  <div class="post-block">
+  <div class="post-block{% if is_home() %} post-block-home{% endif %}">
     <link itemprop="mainEntityOfPage" href="{{ config.url }}{{ url_for(post.path) }}">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -30,6 +30,9 @@
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
       <meta itemprop="name" content="{{ config.title }}">
     </span>
+
+    {###post subgest content###}
+    {% if is_home() %}<div class="post-sub-content">{% endif %}
 
     {% if not headlessPost and is_home() %}
       <header class="post-header">
@@ -169,18 +172,18 @@
         {% if post.description and theme.excerpt_description %}
           {{ post.description }}
           <!--noindex-->
-          <div class="post-button text-center">
+          <div class="post-button">
             <a class="btn" href="{{ url_for(post.path) }}">
-              {{ __('post.read_more') }} &raquo;
+              More &raquo;
             </a>
           </div>
           <!--/noindex-->
         {% elif post.excerpt  %}
           {{ post.excerpt }}
           <!--noindex-->
-          <div class="post-button text-center">
+          <div class="post-button">
             <a class="btn" href="{{ url_for(post.path) }}{% if theme.scroll_to_more %}#{{ __('post.more') }}{% endif %}" rel="contents">
-              {{ __('post.read_more') }} &raquo;
+              More &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -191,7 +194,7 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="{{ url_for(post.path) }}{% if theme.scroll_to_more %}#{{ __('post.more') }}{% endif %}" rel="contents">
-              {{ __('post.read_more') }} &raquo;
+              More &raquo;
             </a>
           </div>
           <!--/noindex-->
@@ -209,6 +212,15 @@
     {#####################}
     {### END POST BODY ###}
     {#####################}
+
+    {% if is_home() %}</div>{% endif %}
+    {###post subgest content end###}
+
+    {% if is_home() %}
+      <div class="post-sub-img">
+        <a class="post-img-link" href="{{ url_for(post.path) }}" style="background-image:url(post.cover)"></a>
+      </div>
+    {% endif %}
 
     {% if theme.wechat_subscriber.enabled and not is_index %}
       <div>
@@ -228,6 +240,7 @@
       </div>
     {% endif %}
 
+    {% if is_post() %}
     <footer class="post-footer">
       {% if post.tags and post.tags.length and not is_index %}
         <div class="post-tags">
@@ -304,6 +317,7 @@
         <div class="post-eof"></div>
       {% endif %}
     </footer>
+    {% endif %}
   </div>
   {######################}
   {### END POST BLOCK ###}

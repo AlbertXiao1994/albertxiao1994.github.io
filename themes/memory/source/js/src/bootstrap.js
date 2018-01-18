@@ -20,6 +20,8 @@ $(document).ready(function () {
     var $siteNav = $('.site-nav');
     var ON_CLASS_NAME = 'site-nav-on';
     var isSiteNavOn = $siteNav.hasClass(ON_CLASS_NAME);
+    var display = isSiteNavOn ? 'none' : 'block';
+    var overflow = isSiteNavOn ? 'auto' : 'hidden';
     var animateAction = isSiteNavOn ? 'slideUp' : 'slideDown';
     var animateCallback = isSiteNavOn ? 'removeClass' : 'addClass';
     var $navDimmer = $('.nav-dimmer');
@@ -30,20 +32,12 @@ $(document).ready(function () {
       $siteNav[animateCallback](ON_CLASS_NAME);
     });
 
-    $navDimmer.css({'display':"block"});
-    $overview.css({'display':"block"});
-    $body.css({'overflow':"hidden"});
+    $navDimmer.css({'display':display});
+    $overview.css({'display':display});
+    $body.css({'overflow':overflow});
   });
 
   $('.nav-dimmer .nav-close').on('click', function () {
-    var $siteNav = $('.site-nav');
-    var $navDimmer = $('.nav-dimmer');
-    var $overview = $('.site-overview-mobile');
-    var $body = $('body');
-
-    $navDimmer.css({'display':"none"});
-    $overview.css({'display':"none"});
-    $body.css({'overflow':"auto"});
     $('.site-nav-toggle button').trigger('click');
   });
 
