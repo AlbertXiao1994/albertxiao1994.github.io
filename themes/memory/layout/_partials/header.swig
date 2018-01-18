@@ -1,5 +1,5 @@
 {% set cover = config.cover.home %}
-{% if is_post() and page.cover %}
+{% if page.cover %}
   {% set cover = page.cover %}
 {% elseif is_archive() %}
   {% set cover = config.cover.archives %}
@@ -175,6 +175,16 @@
         </div>
       </div>
     {% endif %}
+  {% endif %}
+
+  {% if not is_home() %}
+    {% if not is_post() %}
+      <div class="custom-page-title">{{ page.title }}</div>
+    {% endif %}
+  {% endif %}
+
+  {% if is_archive() %}
+    <div class="custom-page-title">时间轴 · Archives</div>
   {% endif %}
 </div>
 
