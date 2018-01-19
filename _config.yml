@@ -82,16 +82,23 @@ deploy:
   branch: master
 
 # Search
-algolia:
-  applicationID: 'Q3XW21I85M'
-  apiKey: '43765cd9f6e3c604546940919ebab935'
-  indexName: 'prod_blog'
-  chunkSize: 5000
-  fields:
-    - title
-    - slug
-    - path
-    - content:strip
+# algolia:
+#   applicationID: 'Q3XW21I85M'
+#   apiKey: '9bd34b0af6028fd42ebd5512e524bfb1'
+#   indexName: 'prod_blog'
+#   chunkSize: 5000
+#   fields:
+#     - title
+#     - slug
+#     - path
+#     - content
+
+# Local Search
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
     
 # Post wordcount display settings
 symbols_count_time:
