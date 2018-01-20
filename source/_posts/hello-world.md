@@ -1,39 +1,135 @@
 ---
 title: Hello World
+date: 2018-01-20 21:30:15
+categories: 前端
+tags:
+- hexo
 cover: http://wx4.sinaimg.cn/mw690/a98da548gy1fnly448ttvj20w30k2dh9.jpg
 ---
-Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
+{% cq %}我在想，你善待世界，大概世界也会善待你吧！{% endcq %}
 
-## Quick Start
+捣鼓一个星期，总算是把博客搭得差不多了。搭博客的过程简直就是一个踩坑之旅。
 
-### Create a new post
+## 博客框架选择
+
+开始之前，在知乎逛了逛，发现搭博客/网站的框架主流的有这么三个：
+
+### WordPress
+
+早闻大名，但是PHP平台的，果断放弃
+
+### Hexo
+
+基于node，知乎很多人推荐，其中不乏像尤雨溪这样的大神
+
+### Hugo
+
+基于Go，这一两年火起来的，Github上的star数直逼Hexo。它的定位很是高远，要做世上最快的静态网站生成框架。有网友做过对比说，Hugo的编译速度可以比Hexo快到几十倍
+
+毋庸置疑，基于node的Hexo显然是对搞前端的同学来说最好的选择。
+
+## 主题重构
+
+选主题时的发现，再一次证明了我的选择。
+
+我发现Hexo社区有一款非常棒的主题——[next](http://theme-next.iissnan.com/)。简直可以用excellent来形容，它好倒不在UI上，那怎么厉害了？
+
+* 受欢迎：它在Github上有近1万1的star
+* 生态好：很多网友贡献代码，使得next的功能强大，有详细的文档
+* 配置性好：尽管集成了那么多功能，但通过配置一个config文件，一步搞定
+* 扩展性高：通过swig模板语言编写，方便维护和扩展
+
+可是我对它的UI并不太喜欢，感觉太老土了。于是，我站在巨人的肩上，开始了主题重构。
+
+最后的效果，就是呈现在各位面前的。
+
+我给它取了个名字，叫[Memory](https://github.com/AlbertXiao1994/hexo-theme-memory)。
+
+## 绝地求生
+
+“吃鸡”游戏最近很火，我也来蹭下热度。～(￣▽￣～)~
+
+### 判断当前页面
+
+要实现我的设计，一个首页问题就是判断当前页面的状态，是主页，文章，归档？最后，我在Hexo[官方文档](https://hexo.io/zh-cn/docs/helpers.html#条件函数)找到了答案，嗯，辅助函数：
+
+is_home()：检查是否为首页
+is_post()：检查是否为文章
+is_archive()：检查是否为归档页
+...
+
+这些条件函数配合swig之类的模板引擎就能写出你需要的页面逻辑
+
+so nice!
+
+### 读取页面信息
+
+要用siwg写出内容响应式的页面，读取每个页面或文章的具体属性是绕不开的问题。
+
+理论上，读取文章属性，`post`这个变量最合适不过了。可是，事情总不会那么顺利。
+
+next主题的文档布局是一个大的类名为container的div包裹了`header`、`main`、`footer`三个部分。源码里，文章页的文章内容是包裹在`main`里面的，而我的需求是将文章的`meta`信息在`header`部分显示，而`header`和`main`源码中时在不同模块里实现的，这时用`post`变量就会出现读取不到值的现象。
+
+这时，有官方文档解救了我！我发现，`page`和`post`这两个有着剪不断理还乱的联系的变量。那就试试`page`变量！
+
+Did it! 再配合着`front-matter`，那feel倍爽儿啊！！！可以“为所欲为”了！
+
+### 终极bug
+
+该来的总会来的。
+
+最后重构的事基本完成了，要部署到Github上了，当我在线访问时，发现我的页面竟然是这样的：
+
+![本该内容响应式的所有头部竟然一样](http://wx2.sinaimg.cn/mw690/a98da548gy1fnnh3vtiacj20go09imy2.jpg)
+
+Are you kidding me?！！！
+
+![吐血](http://wx4.sinaimg.cn/mw690/a98da548gy1fnnj3zf69vg206y02mwgk.gif)
+
+我在本地启server预览时可是OK的！？怎么会public文件夹里的东西和本地server访问的不一样？见鬼了。一套代码，两种编译结果！？
+
+为此，苦苦挣扎了一天，各种百度，各种看文档，各种问师兄，最后还到hexo仓库下开了个issue。
+
+![在hexo仓库下的issue求助](http://wx1.sinaimg.cn/mw690/a98da548gy1fnnhl2lz8mj20dw06qq39.jpg)
+
+过了几小时，发现并没有人鸟我。唉，要放弃了。滚去啃转头书了。
+
+越啃越困。。。唉。。。
+
+就在这时，我突然想起了官方文档里提到，对于服务器：
 
 ``` bash
-$ hexo new "My New Post"
+$ hexo server // 动态监听文件变化
+$ hexo server -s // 只访问public文件夹里的资源
 ```
-
-More info: [Writing](https://hexo.io/docs/writing.html)
-
-### Run server
+而对于生成器：
 
 ``` bash
-$ hexo server
+$ hexo generate // 生成静态文件
+$ hexo generate -w // 监视文件变动并立即重新生成静态文件
 ```
 
-More info: [Server](https://hexo.io/docs/server.html)
+既然`hexo s`和`hexo g`的编译结果不一样，那用`hexo g -w`是不是就可以生成想要的结果呢？
 
-### Generate static files
+**Did it!**
 
-``` bash
-$ hexo generate
-```
+## 写在最后
+Hello World，大概是每人程序员写的第一个程序了。记得去年阿里18周年年会时，黄龙外挂的就是“Hello World”的巨幅喷绘
 
-More info: [Generating](https://hexo.io/docs/generating.html)
+![阿里年会时的“Hello World”的巨幅喷绘](http://wx1.sinaimg.cn/mw690/a98da548gy1fnni1f2ep1j20k00dcjrx.jpg)
 
-### Deploy to remote sites
+**我在想，你善待世界，大概世界也会善待你吧！**
 
-``` bash
-$ hexo deploy
-```
+这应该算是是我第一篇严格意义上的博客了，写博客是进入一个新世界，每一天、每一段旅程都是进入一个新世界。
 
-More info: [Deployment](https://hexo.io/docs/deployment.html)
+我常常会跟女朋友将我在的学的、在做的东西，我总是试着用通俗的语言让她能够明白。前段时间，看一位网友写自己理解闭包的博客，里面有句话让我印象深刻：
+“如果一个概念你不能用一两句话说明白，那你就是没有懂。”
+
+真是精辟！于是，我计划写算是一个系列吧，用最通俗、精练的话去总结一些前端的一些基础问题。一来总结的过程对自己是提高，也为今年的校招做准备，二来要是能对谁有一点帮助那就意外的收获了。
+
+这个系列或许可以叫“前端那些事儿”之类的吧，哈哈！当年明月通俗幽默说明史，我为何不可通俗幽默说前端呢？
+
+“开机，启动，接入！”
+
+{% cq %}既然选择了远方，便只顾风雨兼程——汪国真{% endcq %}
+
