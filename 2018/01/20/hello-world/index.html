@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/a98da548gy1fnnj3zf69vg206y02mwgk.gif">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnnhl2lz8mj20dw06qq39.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnni1f2ep1j20k00dcjrx.jpg">
-<meta property="og:updated_time" content="2018-01-20T16:24:18.850Z">
+<meta property="og:updated_time" content="2018-01-20T16:34:52.020Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="我在想，你善待世界，大概世界也会善待你吧！  捣鼓一个星期，总算是把博客搭得差不多了。搭博客的过程简直就是一个踩坑之旅。 博客框架选择开始之前，在知乎逛了逛，发现搭博客/网站的框架主流的有这么三个： WordPress早闻大名，但是PHP平台的，果断放弃 Hexo基于node，知乎很多人推荐，其中不乏像尤雨溪这样的大神 Hugo基于Go，这一两年火起来的，Github上的star数直逼Hexo。它">
@@ -535,11 +535,13 @@
 <li>受欢迎：它在Github上有近1万1的star</li>
 <li>生态好：很多网友贡献代码，使得next的功能强大，有详细的文档</li>
 <li>配置性好：尽管集成了那么多功能，但通过配置一个config文件，一步搞定</li>
-<li>扩展性高：通过swig模板语言编写，方便维护和扩展。</li>
+<li>扩展性高：通过swig模板语言编写，方便维护和扩展</li>
 </ul>
-<p>可是我对它的UI并不太喜欢，感觉太老土了。于是，我站在巨人的肩上上，开始了主题重构。</p>
+<p>可是我对它的UI并不太喜欢，感觉太老土了。于是，我站在巨人的肩上，开始了主题重构。</p>
 <p>最后的效果，就是呈现在各位面前的。</p>
-<h2 id="绝地求生"><a href="#绝地求生" class="headerlink" title="绝地求生"></a>绝地求生</h2><h3 id="判断当前页面"><a href="#判断当前页面" class="headerlink" title="判断当前页面"></a>判断当前页面</h3><p>要实现我的设计，一个首页问题就是判断当前页面的状态，是主页，文章，归档？最后，我在Hexo<a href="https://hexo.io/zh-cn/docs/helpers.html#条件函数" target="_blank" rel="noopener">官方文档</a>找到了答案，嗯，辅助函数：</p>
+<p>我给它取了个名字，叫<a href="https://github.com/AlbertXiao1994/hexo-theme-memory" target="_blank" rel="noopener">Memory</a>。</p>
+<h2 id="绝地求生"><a href="#绝地求生" class="headerlink" title="绝地求生"></a>绝地求生</h2><p>“吃鸡”游戏最近很火，我也来蹭下热度。～(￣▽￣～)~</p>
+<h3 id="判断当前页面"><a href="#判断当前页面" class="headerlink" title="判断当前页面"></a>判断当前页面</h3><p>要实现我的设计，一个首页问题就是判断当前页面的状态，是主页，文章，归档？最后，我在Hexo<a href="https://hexo.io/zh-cn/docs/helpers.html#条件函数" target="_blank" rel="noopener">官方文档</a>找到了答案，嗯，辅助函数：</p>
 <p>is_home()：检查是否为首页<br>is_post()：检查是否为文章<br>is_archive()：检查是否为归档页<br>…</p>
 <p>这些条件函数配合swig之类的模板引擎就能写出你需要的页面逻辑</p>
 <p>so nice!</p>
@@ -551,7 +553,7 @@
 <h3 id="终极bug"><a href="#终极bug" class="headerlink" title="终极bug"></a>终极bug</h3><p>该来的总会来的。</p>
 <p>最后重构的事基本完成了，要部署到Github上了，当我在线访问时，发现我的页面竟然是这样的：</p>
 <p><img src="http://wx2.sinaimg.cn/mw690/a98da548gy1fnnh3vtiacj20go09imy2.jpg" alt="本该内容响应式的所有头部竟然一样"></p>
-<p>Are you kidding me?</p>
+<p>Are you kidding me?！！！</p>
 <p><img src="http://wx4.sinaimg.cn/mw690/a98da548gy1fnnj3zf69vg206y02mwgk.gif" alt="吐血"></p>
 <p>我在本地启server预览时可是OK的！？怎么会public文件夹里的东西和本地server访问的不一样？见鬼了。一套代码，两种编译结果！？</p>
 <p>为此，苦苦挣扎了一天，各种百度，各种看文档，各种问师兄，最后还到hexo仓库下开了个issue。</p>
