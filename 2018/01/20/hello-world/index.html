@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://wx4.sinaimg.cn/mw690/a98da548gy1fnnj3zf69vg206y02mwgk.gif">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnnhl2lz8mj20dw06qq39.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnni1f2ep1j20k00dcjrx.jpg">
-<meta property="og:updated_time" content="2018-01-20T16:34:52.020Z">
+<meta property="og:updated_time" content="2018-01-20T16:37:43.889Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hello World">
 <meta name="twitter:description" content="我在想，你善待世界，大概世界也会善待你吧！  捣鼓一个星期，总算是把博客搭得差不多了。搭博客的过程简直就是一个踩坑之旅。 博客框架选择开始之前，在知乎逛了逛，发现搭博客/网站的框架主流的有这么三个： WordPress早闻大名，但是PHP平台的，果断放弃 Hexo基于node，知乎很多人推荐，其中不乏像尤雨溪这样的大神 Hugo基于Go，这一两年火起来的，Github上的star数直逼Hexo。它">
@@ -546,10 +546,10 @@
 <p>这些条件函数配合swig之类的模板引擎就能写出你需要的页面逻辑</p>
 <p>so nice!</p>
 <h3 id="读取页面信息"><a href="#读取页面信息" class="headerlink" title="读取页面信息"></a>读取页面信息</h3><p>要用siwg写出内容响应式的页面，读取每个页面或文章的具体属性是绕不开的问题。</p>
-<p>理论上，读取文章属性，post这个变量最合适不过了。可是，事情总不会那么顺利。</p>
-<p>next主题的文档布局是一个大的类名为container的div包裹了<code>header</code>、<code>main</code>、<code>footer</code>三个部分。源码里，文章页的文章内容是包裹在<code>main</code>里面的，而我的需求是将文章的<code>meta</code>信息在<code>header</code>部分显示，而<code>header</code>和<code>main</code>源码中时在不同模块里实现的，这时用post变量就会出现读取不到值的现象。</p>
-<p>这时，有官方文档解救了我！我发现，page和post这两个有着剪不断理还乱的联系的变量。那就试试page变量！</p>
-<p>Did it!再配合着front-matter，那feel倍爽儿啊！！！可以“为所欲为”了！</p>
+<p>理论上，读取文章属性，<code>post</code>这个变量最合适不过了。可是，事情总不会那么顺利。</p>
+<p>next主题的文档布局是一个大的类名为container的div包裹了<code>header</code>、<code>main</code>、<code>footer</code>三个部分。源码里，文章页的文章内容是包裹在<code>main</code>里面的，而我的需求是将文章的<code>meta</code>信息在<code>header</code>部分显示，而<code>header</code>和<code>main</code>源码中时在不同模块里实现的，这时用<code>post</code>变量就会出现读取不到值的现象。</p>
+<p>这时，有官方文档解救了我！我发现，<code>page</code>和<code>post</code>这两个有着剪不断理还乱的联系的变量。那就试试<code>page</code>变量！</p>
+<p>Did it! 再配合着<code>front-matter</code>，那feel倍爽儿啊！！！可以“为所欲为”了！</p>
 <h3 id="终极bug"><a href="#终极bug" class="headerlink" title="终极bug"></a>终极bug</h3><p>该来的总会来的。</p>
 <p>最后重构的事基本完成了，要部署到Github上了，当我在线访问时，发现我的页面竟然是这样的：</p>
 <p><img src="http://wx2.sinaimg.cn/mw690/a98da548gy1fnnh3vtiacj20go09imy2.jpg" alt="本该内容响应式的所有头部竟然一样"></p>
