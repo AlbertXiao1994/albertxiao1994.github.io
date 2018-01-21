@@ -56,7 +56,7 @@ $(document).ready(function () {
     }
   }
 
-  $('.nav-dimmer .nav-close').on('click', function () {
+  $('.nav-dimmer').on('click', function () {
     $('.site-nav-toggle button').trigger('click');
   });
 
