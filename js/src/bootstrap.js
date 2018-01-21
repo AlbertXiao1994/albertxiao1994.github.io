@@ -28,6 +28,7 @@ $(document).ready(function () {
     var $navDimmer = $('.nav-dimmer');
     var $overview = $('.site-overview-mobile');
     var $html = $('html');
+    var $body = $('body');
     var $container = $('.container');
 
     $siteNav.stop()[animateAction]('fast', function () {
@@ -41,6 +42,7 @@ $(document).ready(function () {
     // $navDimmer.css({'display':display});
     $overview.css({'display':display});
     $html.css({'overflow':overflow});
+    $body.css({'overflow':overflow});
     $container.css({'height':height});
   });
 
