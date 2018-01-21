@@ -1420,13 +1420,13 @@ pre .javascript .function {
 @media (min-width: 992px) {
   .custom-post:nth-child(odd) .post-sub-content {
     float: right;
-    padding-left: 30px;
+    padding-left: 20px;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .custom-post:nth-child(odd) .post-sub-content {
     float: right;
-    padding-left: 30px;
+    padding-left: 20px;
   }
 }
 @media (min-width: 992px) {
@@ -1456,13 +1456,13 @@ pre .javascript .function {
 @media (min-width: 992px) {
   .custom-post:nth-child(even) .post-sub-content {
     float: left;
-    padding-right: 30px;
+    padding-right: 20px;
   }
 }
 @media (min-width: 768px) and (max-width: 991px) {
   .custom-post:nth-child(even) .post-sub-content {
     float: left;
-    padding-right: 30px;
+    padding-right: 20px;
   }
 }
 @media (min-width: 992px) {
@@ -2007,6 +2007,11 @@ pre .javascript .function {
   -moz-transform: scale(1.1);
   -o-transform: scale(1.1);
   -ms-transform: scale(1.1);
+}
+@media (max-width: 767px) {
+  .site-author-image {
+    max-width: 80px;
+  }
 }
 .site-author-name {
   margin: 5px 0 0;

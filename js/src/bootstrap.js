@@ -26,7 +26,7 @@ $(document).ready(function () {
     var animateCallback = isSiteNavOn ? 'removeClass' : 'addClass';
     var $navDimmer = $('.nav-dimmer');
     var $overview = $('.site-overview-mobile');
-    var $body = $('body');
+    var $html = $('html');
 
     $siteNav.stop()[animateAction]('fast', function () {
       $siteNav[animateCallback](ON_CLASS_NAME);
@@ -34,7 +34,7 @@ $(document).ready(function () {
 
     $navDimmer.css({'display':display});
     $overview.css({'display':display});
-    $body.css({'overflow':overflow});
+    $html.css({'overflow':overflow});
   });
 
   $('.nav-dimmer .nav-close').on('click', function () {
