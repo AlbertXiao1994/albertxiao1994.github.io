@@ -111,3 +111,6 @@ symbols_count_time:
 cover:
   home: http://wx2.sinaimg.cn/mw690/a98da548gy1fngfyq6mdqj20zk0k0abu.jpg
   archives: http://wx4.sinaimg.cn/mw690/a98da548gy1fnkrdogfxej20r10eh75j.jpg
+
+baidusitemap:
+  path: baidusitemap.xml
