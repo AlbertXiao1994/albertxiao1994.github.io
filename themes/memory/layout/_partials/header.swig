@@ -323,7 +323,8 @@
     </div>
   {% endif %}
 
-  <div class="nav-dimmer">
-    <div class="nav-close">X</div>
-  </div>
 </nav>
+
+<div class="nav-dimmer">
+    <div class="nav-close">X</div>
+</div>
