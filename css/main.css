@@ -2611,6 +2611,11 @@ embed {
 ::-webkit-scrollbar {
   width: 6px;
 }
+@media (max-width: 767px) {
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}
 ::-webkit-scrollbar-track {
   background-color: #fff;
 }
