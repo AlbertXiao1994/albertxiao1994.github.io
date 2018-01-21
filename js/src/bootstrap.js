@@ -36,12 +36,12 @@ $(document).ready(function () {
     if (!isSiteNavOn) {
       $overview.css({'display':display});
     }
-    $siteNav.animate({left: navPos}, 500, function() {
+    $siteNav.animate({left: navPos}, 1000, function() {
       $siteNav[animateCallback](ON_CLASS_NAME);
       $overview.css({'display':display});
     });
 
-    $navDimmer.animate({right: dimPos}, 500, function() {
+    $navDimmer.animate({right: dimPos}, 1000, function() {
       $navDimmer[animateCallback]('nav-dimmer-on');
     });
 
