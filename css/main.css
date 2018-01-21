@@ -1223,7 +1223,6 @@ pre .javascript .function {
 }
 @media screen and (max-width: 991px) {
   .site-nav {
-    display: none;
     margin: 0 -10px;
     padding: 0 10px;
     clear: both;
@@ -1250,24 +1249,32 @@ pre .javascript .function {
 .site-nav .site-overview-mobile span {
   color: #555;
 }
-.site-nav .nav-dimmer {
-  display: none;
+.nav-dimmer {
   font-size: 25px;
   color: #f5f5f5;
 }
+@media (min-width: 992px) {
+  .nav-dimmer {
+    display: none;
+  }
+}
 @media screen and (max-height: 991px) {
-  .site-nav .nav-dimmer {
-    position: fixed;
-    right: 0;
+  .nav-dimmer {
+    position: absolute;
+    right: 100vw;
     top: 0;
     width: 40%;
     height: 100vh;
     background: rgba(0,0,0,0.3);
   }
 }
-.site-nav .nav-dimmer .nav-close {
+.nav-dimmer .nav-close {
   padding-left: 15px;
   cursor: pointer;
+}
+.site-nav-on,
+.nav-dimmer-on {
+  display: block;
 }
 .menu {
   margin-top: 20px;
@@ -2531,7 +2538,7 @@ embed {
 @media screen and (max-width: 991px) {
   .site-nav {
     position: absolute;
-    left: 0;
+    left: -100vw;
     top: 0;
     margin: 0;
     width: 60%;
