@@ -67,7 +67,7 @@
               </span>
             {% endfor %}
             <span class="links-of-author-item">
-              <a href="" target="_blank" title="zhihu"><img src="/images/zhihu.png"></a>
+              <a href="https://www.zhihu.com/people/zjc-yuyi" target="_blank" title="zhihu"><img src="/images/zhihu.png"></a>
             </span>
           </div>
         {% endif %}
