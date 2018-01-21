@@ -2608,8 +2608,15 @@ embed {
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;
 }
-::-webkit-scrollbar {
-  width: 6px;
+@media (min-width: 992px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
 }
 @media (max-width: 767px) {
   ::-webkit-scrollbar {
