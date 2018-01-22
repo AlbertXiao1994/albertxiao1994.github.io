@@ -23,7 +23,7 @@ $(document).ready(function () {
     var display = isSiteNavOn ? 'none' : 'block';
     var overflow = isSiteNavOn ? 'auto' : 'hidden';
     var navPos = isSiteNavOn ? '-100vw' : '0';
-    var dimPos = isSiteNavOn ? '100vw' : '0';
+    var opacity = isSiteNavOn ? '0' : '1';
     var height = isSiteNavOn ? 'auto' : window.innerHeight + 'px';
     var animateAction = isSiteNavOn ? 'slideUp' : 'slideDown';
     var animateCallback = isSiteNavOn ? 'removeClass' : 'addClass';
@@ -35,13 +35,14 @@ $(document).ready(function () {
 
     if (!isSiteNavOn) {
       $overview.css({'display':display});
+      $navDimmer[animateCallback]('nav-dimmer-on');
     }
     $siteNav.animate({left: navPos}, 600, function() {
       $siteNav[animateCallback](ON_CLASS_NAME);
       $overview.css({'display':display});
     });
 
-    $navDimmer.animate({right: dimPos}, 600, function() {
+    $navDimmer.animate({opacity: opacity}, 600, function() {
       $navDimmer[animateCallback]('nav-dimmer-on');
     });
 
