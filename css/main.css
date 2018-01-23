@@ -1786,6 +1786,9 @@ pre .javascript .function {
     display: none;
   }
 }
+.post-meta-item-time {
+  vertical-align: top;
+}
 @media (max-width: 767px) {
   .posts-expand .post-comments-count {
     display: none;
@@ -1814,9 +1817,6 @@ pre .javascript .function {
   border-radius: 50%;
 }
 .post-meta span {
-  vertical-align: top;
-}
-.post-meta span time {
   vertical-align: top;
 }
 @media (max-width: 767px) {
