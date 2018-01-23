@@ -2652,10 +2652,19 @@ embed {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: 20px;
   margin: 0 auto;
   color: #f5f5f5;
   max-width: 700px;
+}
+@media screen and (min-width: 767px) {
+  .custom-post-header {
+    bottom: 20px;
+  }
+}
+@media (max-width: 767px) {
+  .custom-post-header {
+    bottom: 10px;
+  }
 }
 .custom-post-header a {
   color: #f5f5f5;
