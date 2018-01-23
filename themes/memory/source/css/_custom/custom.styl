@@ -37,7 +37,12 @@
     border-color: $link-hover-color;
   }
   .post-title {
-    font-size: 30px;
+    @media screen and (min-width:767px) {
+      font-size: 30px;
+    }
+    +mobile() {
+      font-size: 20px;
+    }
   }
   +mobile() {
     padding-left: 10px;
