@@ -24,7 +24,7 @@ var morePeople = [person];
 alert(people.indexOf(person));           //-1
 alert(morePeople.indexOf(person));       //0
 ``` 
-为什么在`people`中会找不到`person`，而在`morePeolpe`中却可以？
+为什么在`people`中会找不到`person`，而在`morePeople`中却可以？
 ![一脸懵逼](http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg)
 ## 案情分析
 
