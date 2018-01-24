@@ -101,7 +101,7 @@
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwiyvhxuj20bh092mxh.jpg">
 <meta property="og:image" content="http://wx2.sinaimg.cn/mw690/a98da548gy1fnqwudwtvkj205k07tt8w.jpg">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqx9a8yyvj209q07ydfv.jpg">
-<meta property="og:updated_time" content="2018-01-23T14:58:30.465Z">
+<meta property="og:updated_time" content="2018-01-24T12:08:42.651Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="indexOf()引发的血案——引用类型初探">
 <meta name="twitter:description" content="最近，又开始学JS了。JS大概永远也学不完吧！ 初学时，选择的是“犀牛书”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看《数据结构与算法分析》时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。 后来，发现越来越多的人看的是“红宝书”，那我也">
@@ -534,7 +534,7 @@
 alert(people.indexOf(person));           <span class="comment">//-1</span>
 alert(morePeople.indexOf(person));       <span class="comment">//0</span>
 </code></pre>
-<p>为什么在<code>people</code>中会找不到<code>person</code>，而在<code>morePeolpe</code>中却可以？<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg" alt="一脸懵逼"></p>
+<p>为什么在<code>people</code>中会找不到<code>person</code>，而在<code>morePeople</code>中却可以？<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg" alt="一脸懵逼"></p>
 <h2 id="案情分析"><a href="#案情分析" class="headerlink" title="案情分析"></a>案情分析</h2><h3 id="1号嫌疑人：印错"><a href="#1号嫌疑人：印错" class="headerlink" title="1号嫌疑人：印错"></a>1号嫌疑人：印错</h3><p>我买的书虽不一定是正版，但错这么离谱好像不太可能。</p>
 <p>无作案动机，排除！<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwiyvhxuj20bh092mxh.jpg" alt="太天真了"></p>
 <h3 id="2号嫌疑人：indexOf-查找时严格相等的条件"><a href="#2号嫌疑人：indexOf-查找时严格相等的条件" class="headerlink" title="2号嫌疑人：indexOf()查找时严格相等的条件"></a>2号嫌疑人：indexOf()查找时严格相等的条件</h3><p>搜便案发现场，没发现“凶器”类型转换啊？</p>
