@@ -5,7 +5,7 @@ categories: 前端
 tags:
 - webpack
 - VSCode
-cover: http://wx1.sinaimg.cn/mw690/a98da548ly1fnyz14l9qxj20uf0d3wf5.jpg
+cover: http://wx2.sinaimg.cn/mw690/a98da548ly1fnyzhui70lj20go09edgq.jpg
 ---
 {% note info %}
 
@@ -103,21 +103,21 @@ Some command-line options you should know.
 
 ## 目录
 
-1. [入口文件](#demo01-入口文件-源码)
-1. [多个入口文件](#demo02-多个入口文件-源码)
-1. [Babel-loader](#demo03-babel-loader-源码)
-1. [CSS-loader](#demo04-css-loader-源码)
-1. [Image loader](#demo05-image-loader-源码)
-1. [CSS模块](#demo06-css模块-源码)
-1. [UglifyJs插件](#demo07-uglifyjs插件-源码)
-1. [HTML Webpack插件和Open Browser Webpack插件](#demo08-html-webpack插件和open-browser-webpack插件-源码)
-1. [环境标志](#demo09-环境标志-源码)
-1. [代码分割](#demo10-代码分割-源码)
-1. [使用bundle-loader进行代码分割](#demo11-使用bundle-loader进行代码分割-源码)
-1. [共同块](#demo12-共同块-源码)
-1. [依赖块](#demo13-依赖块-源码)
-1. [暴露全局变量](#demo14-暴露全局变量-源码)
-1. [React router](#demo15-react-router-源码)
+1. [入口文件](#Demo01-入口文件-源码)
+1. [多个入口文件](#Demo02-多个入口文件-源码)
+1. [Babel-loader](#Demo03-Babel-loader-源码)
+1. [CSS-loader](#Demo04-CSS-loader-源码)
+1. [Image loader](#demo05-Image-loader-源码)
+1. [CSS模块](#Demo06-CSS模块-源码)
+1. [UglifyJs插件](#demo07-UglifyJs插件-源码)
+1. [HTML Webpack插件和Open Browser Webpack插件](#Demo08-HTML-Webpack插件和Open-Browser-Webpack插件-源码)
+1. [环境标志](#Demo09-环境标志-源码)
+1. [代码分割](#Demo10-代码分割-源码)
+1. [使用bundle-loader进行代码分割](#Demo11-使用bundle-loader进行代码分割-源码)
+1. [共同块](#Demo12-共同块-源码)
+1. [依赖块](#Demo13-依赖块-源码)
+1. [暴露全局变量](#Demo14-暴露全局变量-源码)
+1. [React router](#Demo15-React-Router-源码)
 
 ## Demo01: 入口文件 ([源码](https://github.com/ruanyf/webpack-demos/tree/master/demo01))
 
