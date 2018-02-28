@@ -98,7 +98,7 @@
 <meta property="og:description" content="React的学习曲线高早有耳闻，但真的只有切身经历后才感受的深，也渐渐明白了Vue“渐进式框架”定位的含义。初学React时，只是使用了Ant Design搭积木式做了个新闻webApp，离掌握还差得远。于是，就有了这个React版Albert Music。 技术栈框架：React 16脚手架：Create-React-App路由：React Router 4数据管理：Redux 3数据请求：ax">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fow7qw6idaj20v10catax.jpg">
-<meta property="og:updated_time" content="2018-02-28T11:59:53.322Z">
+<meta property="og:updated_time" content="2018-02-28T12:13:17.494Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Albert Music穿上React新衣——记一次Vue项目重构经历">
 <meta name="twitter:description" content="React的学习曲线高早有耳闻，但真的只有切身经历后才感受的深，也渐渐明白了Vue“渐进式框架”定位的含义。初学React时，只是使用了Ant Design搭积木式做了个新闻webApp，离掌握还差得远。于是，就有了这个React版Albert Music。 技术栈框架：React 16脚手架：Create-React-App路由：React Router 4数据管理：Redux 3数据请求：ax">
@@ -197,7 +197,7 @@
   
 
 
-<div class="site-top-wrapper" style="background-image:url(http://wx1.sinaimg.cn/mw690/a98da548gy1fow6udpf0zj21400jfjs8.jpg)">
+<div class="site-top-wrapper" style="background-image:url(http://wx3.sinaimg.cn/mw690/a98da548gy1fowf2hh0isj20rc0fv45y.jpg)">
   
 
   
@@ -557,7 +557,8 @@
 <p>Redux就复杂多了，又是中间件、又是react-redux，不过我经过多天的爬坑也可提炼个基本套路：</p>
 <p><strong>1、设置action-types：一个数据对应一个类型，如：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_DATA=<span class="string">'SET_DATA'</span></span><br></pre></td></tr></table></figure></p>
 <p><strong>2、编写Actions.js：一个数据对应一个Action生成器，为每个Action编写一个函数派发它，最后编写派发多个action的函数</strong><br><strong>3、编写Reducer文件夹：index.js，负责合成子Reducer，并提供state里所有数据的接口；若干个子Reducer，为接受每个Action更新state里的对应数据</strong><br><strong>4、设置store：传入将合成后的Reducer、中间件</strong><br><strong>5、拆分组件：将需要使用全局数据的组件用一个空组件包裹，将Redux的数据接口提供给mapStateToProps，actions提供给mapDispatchToProps，通过connect将外层组件变为容器组件，给内层组件传入属性、方法</strong></p>
-
+<blockquote class="blockquote-center"><p>终于赶在了3月前把项目重构完，也算是把React全家桶掌握了。下一站，Weex！</p>
+</blockquote>
       
     </div>
     
