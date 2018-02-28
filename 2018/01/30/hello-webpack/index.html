@@ -97,7 +97,7 @@
 <meta property="og:site_name" content="萧文回忆里的疯狂">
 <meta property="og:description" content="Webpack很早就接触了，但以前一直都是跟着脚手架跑跑命令行。配置文件也不算陌生，但一直也没深究。毕竟webpack配置工程师可是稀缺人才啊！昨天在微博上看到有人把阮一峰的webpack-demos教程更新到了3.1，但只有英文版。我索性做个中文文档，趁此再系统学习学习。 这里收集了一些Webpack的简单demo。 我旨在通过简明的方式来写这些demo。跟着它们，你将轻松地学习这一强大的工具。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-02-01T06:01:32.541Z">
+<meta property="og:updated_time" content="2018-02-28T05:30:47.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="遇见webpack">
 <meta name="twitter:description" content="Webpack很早就接触了，但以前一直都是跟着脚手架跑跑命令行。配置文件也不算陌生，但一直也没深究。毕竟webpack配置工程师可是稀缺人才啊！昨天在微博上看到有人把阮一峰的webpack-demos教程更新到了3.1，但只有英文版。我索性做个中文文档，趁此再系统学习学习。 这里收集了一些Webpack的简单demo。 我旨在通过简明的方式来写这些demo。跟着它们，你将轻松地学习这一强大的工具。">
@@ -319,7 +319,7 @@
                 
                   <a href="/archives/">
                 
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -653,7 +653,7 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// package.json</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">  <span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"dev"</span>: <span class="string">"cross-env DEBUG=true webpack-dev-server --open"</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>启动server。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd demo09</span><br><span class="line">$ npm run dev</span><br></pre></td></tr></table></figure>
-<h2 id="Demo10-代码拆分-源码"><a href="#Demo10-代码拆分-源码" class="headerlink" title="Demo10: 代码拆分 (源码)"></a>Demo10: 代码拆分 (<a href="https://github.com/ruanyf/webpack-demos/tree/master/demo10" target="_blank" rel="noopener">源码</a>)</h2><p>对于大型web应用来说，将所有的代码写进一个文件效率会很低。Webpack允许你将大的JS文件拆分成若干个小的代码块（chunk)。尤其在一些代码块仅在某些情况下才使用时，这些代码块应该按需加载。</p>
+<h2 id="Demo10-代码分割-源码"><a href="#Demo10-代码分割-源码" class="headerlink" title="Demo10: 代码分割 (源码)"></a>Demo10: 代码分割 (<a href="https://github.com/ruanyf/webpack-demos/tree/master/demo10" target="_blank" rel="noopener">源码</a>)</h2><p>对于大型web应用来说，将所有的代码写进一个文件效率会很低。Webpack允许你将大的JS文件拆分成若干个小的代码块（chunk)。尤其在一些代码块仅在某些情况下才使用时，这些代码块应该按需加载。</p>
 <p>Webpack使用<code>require.ensure</code>去定义一个拆分点(<a href="https://webpack.js.org/guides/code-splitting/" target="_blank" rel="noopener">官方文档</a>)。</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="built_in">require</span>.ensure([<span class="string">'./a'</span>], <span class="function"><span class="keyword">function</span> (<span class="params">require</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> content = <span class="built_in">require</span>(<span class="string">'./a'</span>);</span><br><span class="line">  <span class="built_in">document</span>.open();</span><br><span class="line">  <span class="built_in">document</span>.write(<span class="string">'&lt;h1&gt;'</span> + content + <span class="string">'&lt;/h1&gt;'</span>);</span><br><span class="line">  <span class="built_in">document</span>.close();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 <p><code>require.ensure</code>告诉Webpack<code>./a.js</code>应该从<code>bundle.js</code>中分离出来，并打包成一个单独的块文件。</p>
@@ -793,6 +793,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/12/test/" rel="prev" title="test">
+                test <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
