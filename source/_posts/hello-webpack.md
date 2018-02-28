@@ -631,7 +631,7 @@ $ cd demo09
 $ npm run dev
 ```
 
-## Demo10: 代码拆分 ([源码](https://github.com/ruanyf/webpack-demos/tree/master/demo10))
+## Demo10: 代码分割 ([源码](https://github.com/ruanyf/webpack-demos/tree/master/demo10))
 
 对于大型web应用来说，将所有的代码写进一个文件效率会很低。Webpack允许你将大的JS文件拆分成若干个小的代码块（chunk)。尤其在一些代码块仅在某些情况下才使用时，这些代码块应该按需加载。
 
