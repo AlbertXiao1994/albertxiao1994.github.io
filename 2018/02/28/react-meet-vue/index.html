@@ -78,7 +78,7 @@
 
 
 
-  <meta name="keywords" content="萧文,博客,前端,随想,分享" />
+  <meta name="keywords" content="React,Vue," />
 
 
 
@@ -89,17 +89,20 @@
 
 
 
-<meta name="description" content="大家好，你们可以叫我萧文，也可以叫我Albert。 萧文，这个名字和我颇有渊源，小时候就差点叫了这个名字。我在想，以后要是进了哪个厂，我的花名就叫萧文了。 关于我的英文名有个小故事：高中时，英语老师以抽签的方式给每人都取了个英文名，还告诉我Albert有“聪明、高贵、人类的守护者”的意思，我也就阴差阳错地承担起了守护人类、拯救地球的责任。哈哈！ 高考填志愿时，凭着自己多年来练就的“3秒修好掉链条的">
+<meta name="description" content="React的学习曲线高早有耳闻，但真的只有切身经历后才感受的深，也渐渐明白了Vue“渐进式框架”定位的含义。初学React时，只是使用了Ant Design搭积木式做了个新闻webApp，离掌握还差得远。于是，就有了这个React版Albert Music。 技术栈框架：React 16脚手架：Create-React-App路由：React Router 4数据管理：Redux 3数据请求：ax">
+<meta name="keywords" content="React,Vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="初次见面，请多指教">
-<meta property="og:url" content="http://alberts.top/2018/01/18/nice-to-meet-you/index.html">
+<meta property="og:title" content="Albert Music穿上React新衣——记一次Vue项目重构经历">
+<meta property="og:url" content="http://alberts.top/2018/02/28/react-meet-vue/index.html">
 <meta property="og:site_name" content="萧文回忆里的疯狂">
-<meta property="og:description" content="大家好，你们可以叫我萧文，也可以叫我Albert。 萧文，这个名字和我颇有渊源，小时候就差点叫了这个名字。我在想，以后要是进了哪个厂，我的花名就叫萧文了。 关于我的英文名有个小故事：高中时，英语老师以抽签的方式给每人都取了个英文名，还告诉我Albert有“聪明、高贵、人类的守护者”的意思，我也就阴差阳错地承担起了守护人类、拯救地球的责任。哈哈！ 高考填志愿时，凭着自己多年来练就的“3秒修好掉链条的">
+<meta property="og:description" content="React的学习曲线高早有耳闻，但真的只有切身经历后才感受的深，也渐渐明白了Vue“渐进式框架”定位的含义。初学React时，只是使用了Ant Design搭积木式做了个新闻webApp，离掌握还差得远。于是，就有了这个React版Albert Music。 技术栈框架：React 16脚手架：Create-React-App路由：React Router 4数据管理：Redux 3数据请求：ax">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-21T01:34:39.698Z">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fow7qw6idaj20v10catax.jpg">
+<meta property="og:updated_time" content="2018-02-28T11:59:53.322Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="初次见面，请多指教">
-<meta name="twitter:description" content="大家好，你们可以叫我萧文，也可以叫我Albert。 萧文，这个名字和我颇有渊源，小时候就差点叫了这个名字。我在想，以后要是进了哪个厂，我的花名就叫萧文了。 关于我的英文名有个小故事：高中时，英语老师以抽签的方式给每人都取了个英文名，还告诉我Albert有“聪明、高贵、人类的守护者”的意思，我也就阴差阳错地承担起了守护人类、拯救地球的责任。哈哈！ 高考填志愿时，凭着自己多年来练就的“3秒修好掉链条的">
+<meta name="twitter:title" content="Albert Music穿上React新衣——记一次Vue项目重构经历">
+<meta name="twitter:description" content="React的学习曲线高早有耳闻，但真的只有切身经历后才感受的深，也渐渐明白了Vue“渐进式框架”定位的含义。初学React时，只是使用了Ant Design搭积木式做了个新闻webApp，离掌握还差得远。于是，就有了这个React版Albert Music。 技术栈框架：React 16脚手架：Create-React-App路由：React Router 4数据管理：Redux 3数据请求：ax">
+<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fow7qw6idaj20v10catax.jpg">
 
 
 
@@ -127,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="http://alberts.top/2018/01/18/nice-to-meet-you/"/>
+  <link rel="canonical" href="http://alberts.top/2018/02/28/react-meet-vue/"/>
 
 
 
 
 
-  <title>初次见面，请多指教 | 萧文回忆里的疯狂</title>
+  <title>Albert Music穿上React新衣——记一次Vue项目重构经历 | 萧文回忆里的疯狂</title>
   
 
 
@@ -194,7 +197,7 @@
   
 
 
-<div class="site-top-wrapper" style="background-image:url(http://wx2.sinaimg.cn/mw690/a98da548gy1fnky27mcb5j20m80dwdig.jpg)">
+<div class="site-top-wrapper" style="background-image:url(http://wx1.sinaimg.cn/mw690/a98da548gy1fow6udpf0zj21400jfjs8.jpg)">
   
 
   
@@ -202,7 +205,7 @@
       <div class="post-header custom-post-header">
         
         
-          <h2 class="post-title" itemprop="name headline">初次见面，请多指教</h2>
+          <h2 class="post-title" itemprop="name headline">Albert Music穿上React新衣——记一次Vue项目重构经历</h2>
         
 
         <div class="post-meta">      
@@ -219,7 +222,7 @@
               
                 <span class="post-meta-item-text">发表</span>
               
-              <time title="创建" class="post-meta-item-time" itemprop="dateCreated datePublished" datetime="2018-01-18T17:29:31+08:00">2018-01-18</time>
+              <time title="创建" class="post-meta-item-time" itemprop="dateCreated datePublished" datetime="2018-02-28T15:14:30+08:00">2018-02-28</time>
             
 
             
@@ -240,8 +243,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/随想/" itemprop="url" rel="index">
-                    <span itemprop="name">随想</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -253,7 +256,7 @@
 
           
           
-             <span id="/2018/01/18/nice-to-meet-you/" class="leancloud_visitors" data-flag-title="初次见面，请多指教">
+             <span id="/2018/02/28/react-meet-vue/" class="leancloud_visitors" data-flag-title="Albert Music穿上React新衣——记一次Vue项目重构经历">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -270,7 +273,7 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-pencil"></i>
                 </span>
-                <span title="字数统计">499</span><span class="post-meta-item-text">字</span>
+                <span title="字数统计">5k</span><span class="post-meta-item-text">字</span>
               
             </span>
           
@@ -489,7 +492,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://alberts.top/2018/01/18/nice-to-meet-you/">
+    <link itemprop="mainEntityOfPage" href="http://alberts.top/2018/02/28/react-meet-vue/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Albert">
@@ -517,18 +520,43 @@
       
 
       
-        <p>大家好，你们可以叫我萧文，也可以叫我Albert。</p>
-<p>萧文，这个名字和我颇有渊源，小时候就差点叫了这个名字。我在想，以后要是进了哪个厂，我的花名就叫萧文了。</p>
-<p>关于我的英文名有个小故事：高中时，英语老师以抽签的方式给每人都取了个英文名，还告诉我Albert有“聪明、高贵、人类的守护者”的意思，我也就阴差阳错地承担起了守护人类、拯救地球的责任。哈哈！</p>
-<p>高考填志愿时，凭着自己多年来练就的“3秒修好掉链条的单车”的天赋，我报了机械专业，自此离拯救地球的道路远走远远。还好，当时学了个C语言程序设计。</p>
-<p>本科毕业后，来杭州读了个小硕。没错，还是机械╯▂╰。可是我读的专业是机械和计算机的结合呀，哈哈哈！</p>
-<p>众多CS方向中，我选择了前端。为啥？喜欢呗！我发现这是一个可以将我所有的兴趣都结合起来的。。。</p>
-<p>什么呢？</p>
-<p><strong>嗯，事业！！！</strong></p>
-<p>前端太好玩了！什么设计、图形、webGL、动画、游戏、业务、数据可视化、算法，各种新工具、新技术，应有尽有。</p>
-<p>有句话叫做：“有人的地方就有江湖。”我想说：“未来的时代，有人的地方就有前端。”</p>
-<p>扯了这么多，该滚去学习了。</p>
-<p>还有很多知识要学，还有好多代码要写，长路漫漫，任重道远。。。</p>
+        <div class="note info"><p>React的学习曲线高早有耳闻，但真的只有切身经历后才感受的深，也渐渐明白了Vue“渐进式框架”定位的含义。初学React时，只是使用了<a href="https://ant.design/index-cn" target="_blank" rel="noopener">Ant Design</a>搭积木式做了个<a href="https://github.com/AlbertXiao1994/react-news" target="_blank" rel="noopener">新闻webApp</a>，离掌握还差得远。于是，就有了这个<a href="https://github.com/AlbertXiao1994/react-music" target="_blank" rel="noopener">React版Albert Music</a>。</p></div>
+<h2 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h2><p>框架：React 16<br>脚手架：Create-React-App<br>路由：React Router 4<br>数据管理：Redux 3<br>数据请求：axios、jsonp<br>优化：immutable.js、fastclick、<a href="https://serverless-stack.com/chapters/code-splitting-in-create-react-app.html" target="_blank" rel="noopener">AsyncComponent</a>实现按需加载<br>动画：<a href="https://reactcommunity.org/react-transition-group/" target="_blank" rel="noopener">React Transition Group</a><br>语言：ES6<br>预处理：Less</p>
+<h2 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h2><p><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fow7qw6idaj20v10catax.jpg" alt="效果图"></p>
+<h2 id="脱坑"><a href="#脱坑" class="headerlink" title="脱坑"></a>脱坑</h2><h4 id="要不要npm-run-eject？"><a href="#要不要npm-run-eject？" class="headerlink" title="要不要npm run eject？"></a>要不要npm run eject？</h4><p>Create-React-App据说是为了优雅，将webpack配置相关的文件封装进了react-scripts包中。这有助于让开发者专注于前端代码，但却束缚力我们的手脚，不利于在脚手架的基础上进行扩展。我选择的是将配置文件暴露出来。</p>
+<p>对webpack配置文件，主要进行三方面改造：</p>
+<ul>
+<li>设置文件路径别名</li>
+<li>使用less-loader</li>
+<li>基于Express，通过devServer里before(app)函数设置数据接口</li>
+</ul>
+<h4 id="项目结构的选择"><a href="#项目结构的选择" class="headerlink" title="项目结构的选择"></a>项目结构的选择</h4><p>以下两种项目结构或许都行：<br>第一种，我现在使用的<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">|── src</span><br><span class="line">|   |── api # 接口相关</span><br><span class="line">|   |── base #基础组件</span><br><span class="line">|   |── common # 通用文件</span><br><span class="line">|   |  |── fonts # 字体、图标</span><br><span class="line">|   |  |── images # 图片资源</span><br><span class="line">|   |  |── js # 函数</span><br><span class="line">|   |  |── style # 样式</span><br><span class="line">|   |──components # 业务组件</span><br><span class="line">|   |──store # Redux配置</span><br><span class="line">|   |  |── reducers # reducer文件夹</span><br><span class="line">|   |  |  |── a.js # 子Reducer</span><br><span class="line">|   |  |  |── b.js # 子Reducer</span><br><span class="line">|   |  |  |── index.js # 合成所有子Reducer</span><br><span class="line">|   |  |── action-types.js # Action类型汇总</span><br><span class="line">|   |  |── actions.js # 定义action生成器、派发action</span><br><span class="line">|   |  |── index.js # 创建store</span><br><span class="line">|   |──App.js # 根组件</span><br><span class="line">|   |──index.js # 入口文件，根组件挂载</span><br><span class="line">|   |──registerServiceWorker.js</span><br></pre></td></tr></table></figure></p>
+<p>第二种，Redux官方例子的项目目录</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">|── src</span><br><span class="line">|   |──actions # Redux的Action文件夹</span><br><span class="line">|   |  |── actions.js # 定义action生成器、派发action</span><br><span class="line">|   |── api # 接口相关</span><br><span class="line">|   |── base #基础组件</span><br><span class="line">|   |── common # 通用文件</span><br><span class="line">|   |  |── fonts # 字体、图标</span><br><span class="line">|   |  |── images # 图片资源</span><br><span class="line">|   |  |── js # 函数</span><br><span class="line">|   |  |── style # 样式</span><br><span class="line">|   |──components # UI组件</span><br><span class="line">|   |──constants # 常量</span><br><span class="line">|   |  |── action-types.js # Action类型汇总</span><br><span class="line">|   |──containers # 容器组件</span><br><span class="line">|   |──store # Redux配置</span><br><span class="line">|  |── reducers # Redux的Reducer文件夹</span><br><span class="line">|  |  |── a.js # 子Reducer</span><br><span class="line">|  |  |── b.js # 子Reducer</span><br><span class="line">|  |  |── index.js # 合成所有子Reducer</span><br><span class="line">|   |──App.js # 根组件</span><br><span class="line">|   |──index.js # 入口文件，根组件挂载，创建store</span><br><span class="line">|   |──registerServiceWorker.js</span><br></pre></td></tr></table></figure>
+<p>这两种项目结构主要有两点差别：</p>
+<ul>
+<li>第一种统一将Redux放在src下，而第二种将Redux拆分后各部分直接放在src下</li>
+<li>后者将使用了Redux的组件显式拆分成UI组件和容器组件，层次清晰</li>
+</ul>
+<p>第一种有着明显的Vue全家桶开发痕迹，但整个技术栈的层次清晰。第二种更适合React全家桶的开发模式，显式将使用了Redux的组件拆分，这点有着明显的优点。</p>
+<p>或许，结合两者的优点是更好的选择：将Redux相关的写到一个文件，显式写出容器组件</p>
+<h4 id="路由配置"><a href="#路由配置" class="headerlink" title="路由配置"></a>路由配置</h4><p>在Vue中，我们习惯于通过一个配置文件t统一管理路由，像这样：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  mode: <span class="string">'history'</span>,</span><br><span class="line">  routes: [</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/'</span>,</span><br><span class="line">      redirect: <span class="string">'/recommend'</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      path: <span class="string">'/recommend'</span>,</span><br><span class="line">      component: Recommend,</span><br><span class="line">      children: [</span><br><span class="line">        &#123;</span><br><span class="line">          path: <span class="string">':id'</span>,</span><br><span class="line">          component: Disc</span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>而在React中，路由也是组件。需要像下面这样把根组件App改造成一个Router组件。至于子路由，可以直接在这个文件配置，也可以在需要的组件下再嵌套</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// App.js</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">App</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;Router&gt;</span><br><span class="line">        &lt;Switch&gt;</span><br><span class="line">          &lt;Route path=<span class="string">"/"</span> exact render=&#123;() =&gt; (</span><br><span class="line">            &lt;Redirect to=<span class="string">"/recommend"</span> /&gt;</span><br><span class="line">          )&#125; /&gt;</span><br><span class="line">          &lt;Route path=<span class="string">"/recommend"</span> component=&#123;Recommend&#125; /&gt;</span><br><span class="line">        &lt;<span class="regexp">/Switch&gt;</span></span><br><span class="line"><span class="regexp">    &lt;/</span>Router&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Recommend.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> Recommend = <span class="function">(<span class="params">&#123;match&#125;</span>) =&gt;</span> (&#123;</span><br><span class="line">  &lt;Route path=&#123;<span class="string">`<span class="subst">$&#123;match.url&#125;</span>/:Id`</span>&#125; component=&#123;SingerDetail&#125; /&gt;</span><br><span class="line">  &lt;Route exact path=&#123;match.url&#125; render=&#123;() =&gt; SomeComp /&gt;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h4 id="监听数据变化"><a href="#监听数据变化" class="headerlink" title="监听数据变化"></a>监听数据变化</h4><p>这个大概是两个框架的最大差别了。</p>
+<p>在Vue中，我们可以很方便地设置计算属性和watch来处理数据变化时的逻辑。</p>
+<p>在React中，为达到同样的目的，我使用了shouldComponentUpdate()、componentWillReceiveProps()这两个钩子函数。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">shouldComponentUpdate(nextProps, nextState) &#123;</span><br><span class="line">  <span class="comment">// 监测state变化</span></span><br><span class="line">  <span class="keyword">if</span> (nextStates.foo !== nextState.foo) &#123;</span><br><span class="line">    <span class="comment">// doSomething</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">componentWillReceiveProps(nextProps) &#123;</span><br><span class="line">   <span class="comment">// 监测props变化</span></span><br><span class="line">   <span class="keyword">if</span> (nextProps.baz !== nextProps.baz) &#123;</span><br><span class="line">    <span class="comment">// doSomething</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="列表和条件渲染"><a href="#列表和条件渲染" class="headerlink" title="列表和条件渲染"></a>列表和条件渲染</h4><p>在Vue中，列表和条件渲染可以方便的分别通过v-for、v-if或者v-show来实现。</p>
+<p>在React中，我们需要采用jsx的方式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 列表渲染</span></span><br><span class="line"><span class="keyword">const</span> listItems = &#123;</span><br><span class="line">  <span class="comment">// key是必须的，有助于提升重新渲染时的性能</span></span><br><span class="line">  array.map(<span class="function">(<span class="params">item, index</span>) =&gt;</span> (</span><br><span class="line">    &lt;li key=&#123;index&#125;&gt;&#123;item&#125;&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">ReactDOM.render(</span></span><br><span class="line"><span class="regexp">  &lt;ul&gt;&#123;listItems&#125;&lt;/u</span>l&gt;,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">'root'</span>)</span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 条件渲染</span></span><br><span class="line"><span class="keyword">const</span> UserCenter = <span class="keyword">this</span>.props.isLogIn ? : <span class="xml"><span class="tag">&lt;<span class="name">LogOut</span> /&gt;</span> : <span class="tag">&lt;<span class="name">LogIn</span> /&gt;</span></span></span><br></pre></td></tr></table></figure>
+<h4 id="数据管理"><a href="#数据管理" class="headerlink" title="数据管理"></a>数据管理</h4><p>Vue有Vuex，React对应着Redux。不过，Redux比Vuex使用起来复杂得多。</p>
+<p>四句话就能说请Vuex的用法：</p>
+<p><strong>1、设置state对象：里面包含所有需要全局管理的数据</strong><br><strong>2、设置mutation-types：一个数据对应一个类型，如：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_DATA=<span class="string">'SET_DATA'</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>3、设置mutation：一个mutation改变一个state里的数据，仅赋值</strong><br><strong>4、设置action：每个action可包含复杂逻辑、异步请求，通过commit提交mutation一个或多个请求</strong></p>
+<p>Redux就复杂多了，又是中间件、又是react-redux，不过我经过多天的爬坑也可提炼个基本套路：</p>
+<p><strong>1、设置action-types：一个数据对应一个类型，如：</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> SET_DATA=<span class="string">'SET_DATA'</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>2、编写Actions.js：一个数据对应一个Action生成器，为每个Action编写一个函数派发它，最后编写派发多个action的函数</strong><br><strong>3、编写Reducer文件夹：index.js，负责合成子Reducer，并提供state里所有数据的接口；若干个子Reducer，为接受每个Action更新state里的对应数据</strong><br><strong>4、设置store：传入将合成后的Reducer、中间件</strong><br><strong>5、拆分组件：将需要使用全局数据的组件用一个空组件包裹，将Redux的数据接口提供给mapStateToProps，actions提供给mapDispatchToProps，通过connect将外层组件变为容器组件，给内层组件传入属性、方法</strong></p>
 
       
     </div>
@@ -577,6 +605,15 @@
     
     <footer class="post-footer">
       
+        <div class="post-tags">
+          <i class="fa fa-fw fa-tags"></i>
+          
+            <a href="/tags/React/" rel="tag"> React</a>
+          
+            <a href="/tags/Vue/" rel="tag"> Vue</a>
+          
+        </div>
+      
 
       
       
@@ -586,15 +623,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/01/30/hello-webpack/" rel="next" title="遇见webpack">
+                <i class="fa fa-chevron-left"></i> 遇见webpack
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/01/20/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
