@@ -13,7 +13,7 @@ React的学习曲线高早有耳闻，但真的只有切身经历后才感受的
 
 {% endnote %}
 
-# 技术栈
+## 技术栈
 
 框架：React 16
 脚手架：Create-React-App
@@ -25,13 +25,13 @@ React的学习曲线高早有耳闻，但真的只有切身经历后才感受的
 语言：ES6
 预处理：Less
 
-# 效果
+## 效果
 
 ![效果图](http://wx1.sinaimg.cn/mw690/a98da548gy1fow7qw6idaj20v10catax.jpg)
 
-# 脱坑
+## 脱坑
 
-## 要不要npm run eject？
+### 要不要npm run eject？
 
 Create-React-App据说是为了优雅，将webpack配置相关的文件封装进了react-scripts包中。这有助于让开发者专注于前端代码，但却束缚力我们的手脚，不利于在脚手架的基础上进行扩展。我选择的是将配置文件暴露出来。
 
@@ -40,7 +40,7 @@ Create-React-App据说是为了优雅，将webpack配置相关的文件封装进
 * 使用less-loader
 * 基于Express，通过devServer里before(app)函数设置数据接口
 
-## 项目结构的选择
+### 项目结构的选择
 
 以下两种项目结构或许都行：
 第一种，我现在使用的
@@ -102,7 +102,7 @@ Create-React-App据说是为了优雅，将webpack配置相关的文件封装进
 
 或许，结合两者的优点是更好的选择：将Redux相关的写到一个文件，显式写出容器组件
 
-## 路由配置
+### 路由配置
 
 在Vue中，我们习惯于通过一个配置文件t统一管理路由，像这样：
 
@@ -155,7 +155,7 @@ export const Recommend = ({match}) => ({
 })
 ```
 
-## 监听数据变化
+### 监听数据变化
 
 这个大概是两个框架的最大差别了。
 
@@ -177,7 +177,7 @@ componentWillReceiveProps(nextProps) {
 }
 ```
 
-## 列表和条件渲染
+### 列表和条件渲染
 
 在Vue中，列表和条件渲染可以方便的分别通过v-for、v-if或者v-show来实现。
 
@@ -199,7 +199,7 @@ ReactDOM.render(
 const UserCenter = this.props.isLogIn ? : <LogOut /> : <LogIn />
 ```
 
-## 数据管理
+### 数据管理
 
 Vue有Vuex，React对应着Redux。不过，Redux比Vuex使用起来复杂得多。
 
