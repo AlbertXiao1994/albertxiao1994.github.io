@@ -365,7 +365,7 @@ han: false
 #swiftype_key:
 
 # Baidu Analytics ID
-baidu_analytics: 2e263741bac14e41002f698f023ca5b5
+#baidu_analytics: 2e263741bac14e41002f698f023ca5b5
 
 # baidu_site_verification
 baidu_site_verification: U0T96khKbj
