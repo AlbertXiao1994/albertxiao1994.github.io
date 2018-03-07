@@ -78,7 +78,6 @@ module.exports = {
 $ webpack
 ```
 
-Some command-line options you should know.
 下面这些命令行选项你需要知道：
 
 - `webpack` – 开发环境下打包
@@ -197,7 +196,7 @@ module.exports = {
 
 ## Demo03: Babel-loader ([源码](https://github.com/ruanyf/webpack-demos/tree/master/demo03))
 
-xxx-loader([more info](https://webpack.js.org/concepts/loaders/) 是在Webpack打包前转换项目里资源文件的预处理器。
+xxx-loader([more info](https://webpack.js.org/concepts/loaders/))是在Webpack打包前转换项目里资源文件的预处理器。
 
 例如，[Babel-loader](https://www.npmjs.com/package/babel-loader)能够将JSX/ES6文件转换成普通的JS文件，之后，Webpack再打包它们。Webpack的官方文档里列出了完整的[loaders](https://webpack.js.org/loaders/)。
 
