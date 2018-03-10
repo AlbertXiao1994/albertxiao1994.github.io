@@ -1,5 +1,5 @@
---- vue router的原理-春招读书笔记（一）
-title: read-vue-router-source
+---
+title: vue router的原理——春招读书笔记（一）
 date: 2018-03-10 15:45:14
 categories: 前端
 tags:
@@ -110,7 +110,7 @@ init (app: any /* Vue component instance */) {
 }
 ```
 
-我们都知道，Vue通过Object.defineProperties()重写属性的`setter`和`getter`并结合观察者模式实现了数据双向绑定。当数据设置新值时，发布消息，之前注册的事件回调函数里的render()就会把视图更新。
+我们都知道，Vue通过Object.defineProperty()重写属性的`setter`和`getter`并结合观察者模式实现了数据双向绑定。当数据设置新值时，发布消息，之前注册的事件回调函数里的render()就会把视图更新。
 
 因此，`app._route`更新时，视图就切走了，好像来到了一个新的页面。
 
