@@ -4,18 +4,16 @@
 
     
   <url>
-    <loc>http://alberts.top/2018/03/10/read-vue-router-source/</loc>
-    <lastmod>2018-03-10T13:31:51.290Z</lastmod>
+    <loc>http://alberts.top/2018/03/10/extend/</loc>
+    <lastmod>2018-03-10T13:36:54.228Z</lastmod>
     <data>
         <display>
-        <title>vue router的原理——春招读书笔记（一）</title>
-        <pubTime>2018-03-10T07:45:14.000Z</pubTime>
+        <title>谈谈继承——春招读书笔记（二）</title>
+        <pubTime>2018-03-10T09:54:44.000Z</pubTime>
         
-        <tag>vue</tag>
+        <tag>继承</tag>
          
-        <tag>vue router</tag>
-         
-        <tag>观察者模式</tag>
+        <tag>ES6</tag>
          
          
            
@@ -28,16 +26,18 @@
 
     
   <url>
-    <loc>http://alberts.top/2018/03/10/extend/</loc>
-    <lastmod>2018-03-10T13:23:44.116Z</lastmod>
+    <loc>http://alberts.top/2018/03/10/read-vue-router-source/</loc>
+    <lastmod>2018-03-10T13:31:51.290Z</lastmod>
     <data>
         <display>
-        <title>谈谈继承——春招读书笔记（一）</title>
-        <pubTime>2018-03-10T09:54:44.000Z</pubTime>
+        <title>vue router的原理——春招读书笔记（一）</title>
+        <pubTime>2018-03-10T07:45:14.000Z</pubTime>
         
-        <tag>继承</tag>
+        <tag>vue</tag>
          
-        <tag>ES6</tag>
+        <tag>vue router</tag>
+         
+        <tag>观察者模式</tag>
          
          
            
