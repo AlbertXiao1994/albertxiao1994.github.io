@@ -1,9 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title></title>
+    <title><![CDATA[vue router的原理-春招读书笔记（一）]]></title>
     <url>%2F2018%2F03%2F10%2Fread-vue-router-source%2F</url>
-    <content type="text"><![CDATA[— vue router的原理-春招读书笔记（一）title: read-vue-router-sourcedate: 2018-03-10 15:45:14categories: 前端tags: vue vue router 观察者模式cover: http://wx3.sinaimg.cn/mw690/a98da548gy1fp7rtyt75ij20xc0iraei.jpg 找工作真是累，现在是感受到了。不但学习强度高，一刻不能懈怠，而且还要承受被面试官面到怀疑人生的境地。过两天就要一面了，在此总结下这段时间基础知识查缺补漏的一些难啃的骨头。但求有一个好人品，到时有一个好结果。 vue router有三种模式：hash、history、abstract。它们在新建Router实例时通过mode选项设置。 this.$router大家都很熟悉，根据我的理解，它其实是一个特殊的history实例。在路由实例初始化时，在构造函数中根据mode和程序运行的环境的支持情况，生成相应的history。如： 12345678910111213141516// 根据mode确定history实际的类并实例化 switch (mode) &#123; case 'history': this.history = new HTML5History(this, options.base) break case 'hash': this.history = new HashHistory(this, options.base, this.fallback) break case 'abstract': this.history = new AbstractHistory(this, options.base) break default: if (process.env.NODE_ENV !== 'production') &#123; assert(false, `invalid mode: $&#123;mode&#125;`) &#125; &#125; 所以，你调用this.$router.push其实是调用这个特殊的history的push方法。那history.push里发生了什么呢？ 所有类型里的history.push大概长这样：1234567891011push (location: RawLocation, onComplete?: Function, onAbort?: Function) &#123; const &#123; current: fromRoute &#125; = this this.transitionTo(location, route =&gt; &#123; // HashHistory pushHash(...params) // HTML5History // pushState() // 一些代码 onComplete &amp;&amp; onComplete(route) &#125;, onAbort)&#125; 很明显了，就是通过各自的this.transtionTo方法去往抽象的历史状态队列中添加新状态。 12345678// HashHistoryfunction pushHash (path) &#123; window.location.hash = path&#125;// HTML5HistorypushHash(...params) &#123;windows.history.pushState(stateObject, title, URL) 好了，现在历史状态更新了，那就要更新视图了。 刚才我们只是调用了this.transitionTo()方法，那它执行的结果是啥呢。随我进入实例history的构造函数里，它是一个观察者模式： 123456789101112131415161718transitionTo (location: RawLocation, onComplete?: Function, onAbort?: Function) &#123; const route = this.router.match(location, this.current) this.confirmTransition(route, () =&gt; &#123; this.updateRoute(route) ... &#125;)&#125;updateRoute (route: Route) &#123; // 发布 this.cb &amp;&amp; this.cb(route) &#125;// 订阅listen (cb: Function) &#123; this.cb = cb&#125; 可见，调用它其实是发布了一个route或者说location。那它是在哪里订阅的呢？答：在路由实例初始化时。在VueRouter构造函数里有个init方法： 123456789101112init (app: any /* Vue component instance */) &#123; this.apps.push(app) // 订阅 history.listen(route =&gt; &#123; this.apps.forEach((app) =&gt; &#123; // 给每个组件实例app设置新的_route属性 app._route = route &#125;) &#125;)&#125; 我们都知道，Vue通过Object.defineProperties()重写属性的setter和getter并结合观察者模式实现了数据双向绑定。当数据设置新值时，发布消息，之前注册的事件回调函数里的render()就会把视图更新。 因此，app._route更新时，视图就切走了，好像来到了一个新的页面。 Vue真是把发布订阅模式发挥得淋漓尽致！]]></content>
+    <content type="text"><![CDATA[找工作真是累，现在是感受到了。不但学习强度高，一刻不能懈怠，而且还要承受被面试官面到怀疑人生的境地。过两天就要一面了，在此总结下这段时间基础知识查缺补漏的一些难啃的骨头。但求有一个好人品，到时有一个好结果。 vue router有三种模式：hash、history、abstract。它们在新建Router实例时通过mode选项设置。 this.$router大家都很熟悉，根据我的理解，它其实是一个特殊的history实例。在路由实例初始化时，在构造函数中根据mode和程序运行的环境的支持情况，生成相应的history。如： 12345678910111213141516// 根据mode确定history实际的类并实例化 switch (mode) &#123; case 'history': this.history = new HTML5History(this, options.base) break case 'hash': this.history = new HashHistory(this, options.base, this.fallback) break case 'abstract': this.history = new AbstractHistory(this, options.base) break default: if (process.env.NODE_ENV !== 'production') &#123; assert(false, `invalid mode: $&#123;mode&#125;`) &#125; &#125; 所以，你调用this.$router.push其实是调用这个特殊的history的push方法。那history.push里发生了什么呢？ 所有类型里的history.push大概长这样：1234567891011push (location: RawLocation, onComplete?: Function, onAbort?: Function) &#123; const &#123; current: fromRoute &#125; = this this.transitionTo(location, route =&gt; &#123; // HashHistory pushHash(...params) // HTML5History // pushState() // 一些代码 onComplete &amp;&amp; onComplete(route) &#125;, onAbort)&#125; 很明显了，就是通过各自的this.transtionTo方法去往抽象的历史状态队列中添加新状态。 12345678// HashHistoryfunction pushHash (path) &#123; window.location.hash = path&#125;// HTML5HistorypushHash(...params) &#123;windows.history.pushState(stateObject, title, URL) 好了，现在历史状态更新了，那就要更新视图了。 刚才我们只是调用了this.transitionTo()方法，那它执行的结果是啥呢。随我进入实例history的构造函数里，它是一个观察者模式： 123456789101112131415161718transitionTo (location: RawLocation, onComplete?: Function, onAbort?: Function) &#123; const route = this.router.match(location, this.current) this.confirmTransition(route, () =&gt; &#123; this.updateRoute(route) ... &#125;)&#125;updateRoute (route: Route) &#123; // 发布 this.cb &amp;&amp; this.cb(route) &#125;// 订阅listen (cb: Function) &#123; this.cb = cb&#125; 可见，调用它其实是发布了一个route或者说location。那它是在哪里订阅的呢？答：在路由实例初始化时。在VueRouter构造函数里有个init方法： 123456789101112init (app: any /* Vue component instance */) &#123; this.apps.push(app) // 订阅 history.listen(route =&gt; &#123; this.apps.forEach((app) =&gt; &#123; // 给每个组件实例app设置新的_route属性 app._route = route &#125;) &#125;)&#125; 我们都知道，Vue通过Object.defineProperties()重写属性的setter和getter并结合观察者模式实现了数据双向绑定。当数据设置新值时，发布消息，之前注册的事件回调函数里的render()就会把视图更新。 因此，app._route更新时，视图就切走了，好像来到了一个新的页面。 Vue真是把发布订阅模式发挥得淋漓尽致！]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>vue</tag>
+        <tag>vue router</tag>
+        <tag>观察者模式</tag>
+      </tags>
   </entry>
   <entry>
     <title><![CDATA[Weex! This is for everyone]]></title>
@@ -13,8 +21,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>weex</tag>
         <tag>vue</tag>
+        <tag>weex</tag>
       </tags>
   </entry>
   <entry>

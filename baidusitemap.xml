@@ -5,14 +5,23 @@
     
   <url>
     <loc>http://alberts.top/2018/03/10/read-vue-router-source/</loc>
-    <lastmod>2018-03-10T07:52:01.833Z</lastmod>
+    <lastmod>2018-03-10T09:51:44.593Z</lastmod>
     <data>
         <display>
-        <title></title>
-        <pubTime>2018-03-10T07:45:14.844Z</pubTime>
+        <title>vue router的原理-春招读书笔记（一）</title>
+        <pubTime>2018-03-10T07:45:14.000Z</pubTime>
         
+        <tag>vue</tag>
+         
+        <tag>vue router</tag>
+         
+        <tag>观察者模式</tag>
+         
          
            
+             
+              <breadCrumb title="前端" url="http://alberts.top/categories/%E5%89%8D%E7%AB%AF/"/>
+          
         </display>
     </data>
     </url>
@@ -26,9 +35,9 @@
         <title>Weex! This is for everyone</title>
         <pubTime>2018-03-06T01:40:50.000Z</pubTime>
         
-        <tag>weex</tag>
-         
         <tag>vue</tag>
+         
+        <tag>weex</tag>
          
          
            
