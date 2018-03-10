@@ -1,16 +1,858 @@
-<!DOCTYPE html><html class="theme-next muse use-motion" lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1"><meta name="theme-color" content="#222"><script src="/lib/pace/pace.min.js?v=1.0.2"></script><link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><meta name="baidu-site-verification" content="U0T96khKbj"><link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css"><link href="/css/main.css?v=0.0.1" rel="stylesheet" type="text/css"><link rel="apple-touch-icon" sizes="180x180" href="http://wx1.sinaimg.cn/mw690/a98da548gy1fnf7lhrtwkj204g04ggle.jpg?v=0.0.1"><link rel="icon" type="image/png" sizes="32x32" href="http://wx4.sinaimg.cn/mw690/a98da548gy1fng8gw4os3j200w00wwea.jpg?v=0.0.1"><link rel="icon" type="image/png" sizes="16x16" href="http://wx2.sinaimg.cn/mw690/a98da548gy1fng8h4bicmj200g00g0s9.jpg?v=0.0.1"><link rel="mask-icon" href="/images/logo.svg?v=0.0.1" color="#222"><meta name="keywords" content="对象,引用类型,"><meta name="description" content="最近，又开始学JS了。JS大概永远也学不完吧！ 初学时，选择的是“犀牛书”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看《数据结构与算法分析》时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。 后来，发现越来越多的人看的是“红宝书”，那我也"><meta name="keywords" content="对象,引用类型"><meta property="og:type" content="article"><meta property="og:title" content="indexOf()引发的血案——引用类型初探"><meta property="og:url" content="http://alberts.top/2018/01/23/understand-reference-type/index.html"><meta property="og:site_name" content="萧文回忆里的疯狂"><meta property="og:description" content="最近，又开始学JS了。JS大概永远也学不完吧！ 初学时，选择的是“犀牛书”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看《数据结构与算法分析》时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。 后来，发现越来越多的人看的是“红宝书”，那我也"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg"><meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwiyvhxuj20bh092mxh.jpg"><meta property="og:image" content="http://wx2.sinaimg.cn/mw690/a98da548gy1fnqwudwtvkj205k07tt8w.jpg"><meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqx9a8yyvj209q07ydfv.jpg"><meta property="og:updated_time" content="2018-01-24T12:14:28.751Z"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="indexOf()引发的血案——引用类型初探"><meta name="twitter:description" content="最近，又开始学JS了。JS大概永远也学不完吧！ 初学时，选择的是“犀牛书”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看《数据结构与算法分析》时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。 后来，发现越来越多的人看的是“红宝书”，那我也"><meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg"><script type="text/javascript" id="hexo.configurations">var NexT=window.NexT||{},CONFIG={root:"/",scheme:"Muse",version:"0.0.1",sidebar:{display:"remove",offset:12,b2t:!1,scrollpercent:!1,onmobile:!1},fancybox:!1,fastclick:!0,lazyload:!0,tabs:!0,motion:{enable:!0,async:!1,transition:{post_block:"fadeIn",post_header:"slideDownIn",post_body:"slideDownIn",coll_header:"slideLeftIn",sidebar:"slideUpIn"}},algolia:{applicationID:"",apiKey:"",indexName:"",hits:{per_page:5},labels:{input_placeholder:"探探究竟吧",hits_empty:"[${query}]找不到呀，试试别的吧",hits_stats:"找到了${hits}个结果在${time}ms内"}}}</script><link rel="canonical" href="http://alberts.top/2018/01/23/understand-reference-type/"><title>indexOf()引发的血案——引用类型初探 | 萧文回忆里的疯狂</title><noscript><style type="text/css">.sidebar-inner,.use-motion .brand,.use-motion .collection-title,.use-motion .comments,.use-motion .menu-item,.use-motion .motion-element,.use-motion .pagination,.use-motion .post-block,.use-motion .post-body,.use-motion .post-header{opacity:initial}.use-motion .logo,.use-motion .site-subtitle,.use-motion .site-title{opacity:initial;top:initial}.logo-line-after i{right:initial}</style></noscript></head><body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans"><div class="container page-post-detail"><header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="header-inner"><div class="site-top-wrapper" style="background-image:url(http://wx4.sinaimg.cn/mw690/a98da548gy1fnqv9ci5yej20pj0bj0tf.jpg)"><div class="post-header custom-post-header"><h2 class="post-title" itemprop="name headline">indexOf()引发的血案——引用类型初探</h2><div class="post-meta"> <span class="post-author"><img itemprop="image" src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnf7lhrtwkj204g04ggle.jpg" alt="Albert"></span><span class="post-time"><span class="post-meta-item-icon"><i class="fa fa-clock-o"></i></span> <span class="post-meta-item-text">发表</span> <time title="创建" class="post-meta-item-time" itemprop="dateCreated datePublished" datetime="2018-01-23T21:20:43+08:00">2018-01-23</time></span> <span class="post-category"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-folder-o"></i></span> <span class="post-meta-item-text">分类</span> <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/前端/" itemprop="url" rel="index"><span itemprop="name">前端</span></a></span></span> <span id="/2018/01/23/understand-reference-type/" class="leancloud_visitors" data-flag-title="indexOf()引发的血案——引用类型初探"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-eye"></i></span><span class="leancloud-visitors-count"></span> <span class="post-meta-item-text">次阅读</span></span> <span class="post-wordcount"><span class="post-meta-divider">|</span><span class="post-meta-item-icon"><i class="fa fa-pencil"></i></span> <span title="字数统计">1k</span><span class="post-meta-item-text">字</span></span></div></div></div><div class="site-nav-toggle"> <button><span class="btn-bar"></span><span class="btn-bar"></span><span class="btn-bar"></span></button></div><nav class="site-nav"><div class="site-title"><a href="/">萧文回忆里的疯狂</a></div><div class="site-overview site-overview-mobile"><div class="site-author" itemprop="author" itemscope itemtype="http://schema.org/Person"> <img class="site-author-image" itemprop="image" src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnf7lhrtwkj204g04ggle.jpg" alt="Albert"><p class="site-author-name" itemprop="name">Albert</p></div><nav class="site-state"><div class="site-state-item site-state-posts"> <a href="/archives/"><span class="site-state-item-count">7</span> <span class="site-state-item-name">日志</span></a></div><div class="site-state-item site-state-categories"> <a href="/categories/index.html"><span class="site-state-item-count">2</span> <span class="site-state-item-name">分类</span></a></div><div class="site-state-item site-state-tags"> <a href="/tags/index.html"><span class="site-state-item-count">11</span> <span class="site-state-item-name">标签</span></a></div></nav><div class="links-of-author"><span class="links-of-author-item"><a href="https://github.com/albertxiao1994" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i></a></span><span class="links-of-author-item"><a href="http://weibo.com/spacegrid" target="_blank" title="weibo"><i class="fa fa-fw fa-weibo"></i></a></span> <span class="links-of-author-item"><a href="" target="_blank" title="zhihu"><img src="/images/zhihu.png"></a></span></div></div><ul id="menu" class="menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> 首页</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-hourglass-half"></i> 时间轴</a></li><li class="menu-item menu-item-categories"><a href="/categories" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> 分类</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> 标签</a></li><li class="menu-item menu-item-photo"><a href="/photo/" rel="section"><i class="menu-item-icon fa fa-fw fa-photo"></i> 照片墙</a></li><li class="menu-item menu-item-friends"><a href="/friends" rel="section"><i class="menu-item-icon fa fa-fw fa-tint"></i> 朋友圈</a></li><li class="menu-item menu-item-follow"><a href="/follow" rel="section"><i class="menu-item-icon fa fa-fw fa-tablet"></i> 顺走</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-street-view"></i> 关于</a></li><li class="menu-item menu-item-search"><a href="javascript:;" class="popup-trigger"><i class="menu-item-icon fa fa-search fa-fw"></i> 搜索</a></li></ul><div class="site-search"><div class="popup search-popup local-search-popup"><div class="local-search-header clearfix"><span class="search-icon"><i class="fa fa-search"></i></span><span class="popup-btn-close"><i class="fa fa-times-circle"></i></span><div class="local-search-input-wrapper"> <input autocomplete="off" placeholder="探探究竟吧！" spellcheck="false" type="text" id="local-search-input"></div></div><div id="local-search-result"></div></div></div></nav><div class="nav-dimmer"></div></div></header><main id="main" class="main"><div class="main-inner"><div class="content-wrap"><div id="content" class="content"><div id="posts" class="posts-expand"><article class="post post-type-normal" itemscope itemtype="http://schema.org/Article"><div class="post-block"><link itemprop="mainEntityOfPage" href="http://alberts.top/2018/01/23/understand-reference-type/"><span hidden itemprop="author" itemscope itemtype="http://schema.org/Person"><meta itemprop="name" content="Albert"><meta itemprop="description" content=""><meta itemprop="image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnf7lhrtwkj204g04ggle.jpg"></span><span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization"><meta itemprop="name" content="萧文回忆里的疯狂"></span><div class="post-body" itemprop="articleBody"><p>最近，又开始学JS了。JS大概永远也学不完吧！</p><p>初学时，选择的是“<a href="https://book.douban.com/subject/10549733/" target="_blank" rel="noopener">犀牛书</a>”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看<a href="https://book.douban.com/subject/1139426/" target="_blank" rel="noopener">《数据结构与算法分析》</a>时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。</p><p>后来，发现越来越多的人看的是“<a href="https://book.douban.com/subject/10546125/" target="_blank" rel="noopener">红宝书</a>”，那我也不能落下啊！看了几章，相见恨晚。它的语言很对中国人的味儿，就像一位网友说的，读它就像读一篇篇的博客。而它，又不失深度。</p><h2 id="案发"><a href="#案发" class="headerlink" title="案发"></a>案发</h2><p>当我看到第五章引用类型时，被眼前的一幕震惊了：</p><pre><code class="javascript"><span class="keyword">var</span> person = { <span class="attr">name</span>:  <span class="string">"Nicholas"</span>};
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+  <meta name="baidu-site-verification" content="U0T96khKbj" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=0.0.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="http://wx1.sinaimg.cn/mw690/a98da548gy1fnf7lhrtwkj204g04ggle.jpg?v=0.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="http://wx4.sinaimg.cn/mw690/a98da548gy1fng8gw4os3j200w00wwea.jpg?v=0.0.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="http://wx2.sinaimg.cn/mw690/a98da548gy1fng8h4bicmj200g00g0s9.jpg?v=0.0.1">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=0.0.1" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="对象,引用类型," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="最近，又开始学JS了。JS大概永远也学不完吧！ 初学时，选择的是“犀牛书”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看《数据结构与算法分析》时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。 后来，发现越来越多的人看的是“红宝书”，那我也">
+<meta name="keywords" content="对象,引用类型">
+<meta property="og:type" content="article">
+<meta property="og:title" content="indexOf()引发的血案——引用类型初探">
+<meta property="og:url" content="http://alberts.top/2018/01/23/understand-reference-type/index.html">
+<meta property="og:site_name" content="萧文回忆里的疯狂">
+<meta property="og:description" content="最近，又开始学JS了。JS大概永远也学不完吧！ 初学时，选择的是“犀牛书”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看《数据结构与算法分析》时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。 后来，发现越来越多的人看的是“红宝书”，那我也">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwiyvhxuj20bh092mxh.jpg">
+<meta property="og:image" content="http://wx2.sinaimg.cn/mw690/a98da548gy1fnqwudwtvkj205k07tt8w.jpg">
+<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqx9a8yyvj209q07ydfv.jpg">
+<meta property="og:updated_time" content="2018-01-24T12:14:28.751Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="indexOf()引发的血案——引用类型初探">
+<meta name="twitter:description" content="最近，又开始学JS了。JS大概永远也学不完吧！ 初学时，选择的是“犀牛书”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看《数据结构与算法分析》时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。 后来，发现越来越多的人看的是“红宝书”，那我也">
+<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '0.0.1',
+    sidebar: {"display":"remove","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: true,
+    lazyload: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":5},
+      labels: {"input_placeholder":"探探究竟吧","hits_empty":"[${query}]找不到呀，试试别的吧","hits_stats":"找到了${hits}个结果在${time}ms内"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://alberts.top/2018/01/23/understand-reference-type/"/>
+
+
+
+
+
+  <title>indexOf()引发的血案——引用类型初探 | 萧文回忆里的疯狂</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+
+  <div class="container  page-post-detail">
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"> 
+
+  
+
+
+<div class="site-top-wrapper" style="background-image:url(http://wx4.sinaimg.cn/mw690/a98da548gy1fnqv9ci5yej20pj0bj0tf.jpg)">
+  
+
+  
+    
+      <div class="post-header custom-post-header">
+        
+        
+          <h2 class="post-title" itemprop="name headline">indexOf()引发的血案——引用类型初探</h2>
+        
+
+        <div class="post-meta">      
+          
+            <span class="post-author"><img itemprop="image"
+                src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnf7lhrtwkj204g04ggle.jpg"
+                alt="Albert" /></span>
+          
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表</span>
+              
+              <time title="创建" class="post-meta-item-time" itemprop="dateCreated datePublished" datetime="2018-01-23T21:20:43+08:00">2018-01-23</time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+          
+             <span id="/2018/01/23/understand-reference-type/" class="leancloud_visitors" data-flag-title="indexOf()引发的血案——引用类型初探">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="leancloud-visitors-count"></span>
+               <span class="post-meta-item-text">次阅读</span>
+             </span>
+          
+
+          
+            <span class="post-wordcount">
+              <span class="post-meta-divider">|</span>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-pencil"></i>
+                </span>
+                <span title="字数统计">1k</span><span class="post-meta-item-text">字</span>
+              
+            </span>
+          
+
+        </div>
+      </div>
+    
+  
+
+  
+    
+  
+
+  
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+
+<nav class="site-nav">
+  
+
+  <div class="site-title"><a href="/">萧文回忆里的疯狂</a></div>
+
+  <div class="site-overview site-overview-mobile">
+        <div class="site-author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnf7lhrtwkj204g04ggle.jpg"
+              alt="Albert" />
+          
+          <p class="site-author-name" itemprop="name">Albert</p>
+        </div>
+
+        
+          <nav class="site-state">
+            
+              <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                  <span class="site-state-item-count">8</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-name">分类</span>
+                  </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+          </nav>
+        
+
+        
+          <div class="links-of-author">
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/albertxiao1994" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i></a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/spacegrid" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i></a>
+              </span>
+            
+            <span class="links-of-author-item">
+              <a href="" target="_blank" title="zhihu"><img src="/images/zhihu.png"></a>
+            </span>
+          </div>
+        
+
+  </div>
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-home"></i>首页</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-hourglass-half"></i>时间轴</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-th"></i>分类</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tags"></i>标签</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-photo">
+          <a href="/photo/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-photo"></i>照片墙</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-friends">
+          <a href="/friends" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tint"></i>朋友圈</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-follow">
+          <a href="/follow" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-tablet"></i>顺走</a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            <i class="menu-item-icon fa fa-fw fa-street-view"></i>关于</a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i>搜索</a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="探探究竟吧！" spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+
+</nav>
+
+<div class="nav-dimmer">
+</div>
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://alberts.top/2018/01/23/understand-reference-type/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Albert">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fnf7lhrtwkj204g04ggle.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="萧文回忆里的疯狂">
+    </span>
+
+    
+
+    
+    
+
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>最近，又开始学JS了。JS大概永远也学不完吧！</p>
+<p>初学时，选择的是“<a href="https://book.douban.com/subject/10549733/" target="_blank" rel="noopener">犀牛书</a>”，它被称为JS程序员心中的“圣经”。被称为“经”，我想是有原因的。这本书块头很大，语言有些晦涩，看得我晕头转向（上次这种感觉还是看<a href="https://book.douban.com/subject/1139426/" target="_blank" rel="noopener">《数据结构与算法分析》</a>时），但我竟然啃（fan）下（guo）来（yi）了（bian）。我想很大的原因可能是当初淘宝团队在翻译时采用了接近直译的方式。</p>
+<p>后来，发现越来越多的人看的是“<a href="https://book.douban.com/subject/10546125/" target="_blank" rel="noopener">红宝书</a>”，那我也不能落下啊！看了几章，相见恨晚。它的语言很对中国人的味儿，就像一位网友说的，读它就像读一篇篇的博客。而它，又不失深度。</p>
+<h2 id="案发"><a href="#案发" class="headerlink" title="案发"></a>案发</h2><p>当我看到第五章引用类型时，被眼前的一幕震惊了：</p>
+<pre><code class="javascript"><span class="keyword">var</span> person = { <span class="attr">name</span>:  <span class="string">"Nicholas"</span>};
 <span class="keyword">var</span> people = [{ <span class="attr">name</span>: <span class="string">"Nicholas"</span>};
 
 <span class="keyword">var</span> morePeople = [person];
 alert(people.indexOf(person));           <span class="comment">//-1</span>
 alert(morePeople.indexOf(person));       <span class="comment">//0</span>
-</code></pre><p>为什么在<code>people</code>中会找不到<code>person</code>，而在<code>morePeople</code>中却可以？<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg" alt="一脸懵逼"></p><h2 id="案情分析"><a href="#案情分析" class="headerlink" title="案情分析"></a>案情分析</h2><h3 id="1号嫌疑人：印错"><a href="#1号嫌疑人：印错" class="headerlink" title="1号嫌疑人：印错"></a>1号嫌疑人：印错</h3><p>我买的书虽不一定是正版，但错这么离谱好像不太可能。</p><p>无作案动机，排除！<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwiyvhxuj20bh092mxh.jpg" alt="太天真了"></p><h3 id="2号嫌疑人：indexOf-查找时严格相等的条件"><a href="#2号嫌疑人：indexOf-查找时严格相等的条件" class="headerlink" title="2号嫌疑人：indexOf()查找时严格相等的条件"></a>2号嫌疑人：indexOf()查找时严格相等的条件</h3><p>搜便案发现场，没发现“凶器”类型转换啊？</p><p>有不在场证明，排除！</p><p>僵掉了呀！<br><img src="http://wx2.sinaimg.cn/mw690/a98da548gy1fnqwudwtvkj205k07tt8w.jpg" alt="天真，too"></p><h3 id="3号嫌疑人：引用类型"><a href="#3号嫌疑人：引用类型" class="headerlink" title="3号嫌疑人：引用类型"></a>3号嫌疑人：引用类型</h3><p>人脏具获，束手就擒吧：</p><pre><code class="javascript"><span class="keyword">var</span> person = { <span class="attr">name</span>:  <span class="string">"Nicholas"</span>}; <span class="comment">//person是对象{ name:  "Nicholas"}的引用A，是一个对象指针</span>
+</code></pre>
+<p>为什么在<code>people</code>中会找不到<code>person</code>，而在<code>morePeople</code>中却可以？<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwdx7oy7j209e064glk.jpg" alt="一脸懵逼"></p>
+<h2 id="案情分析"><a href="#案情分析" class="headerlink" title="案情分析"></a>案情分析</h2><h3 id="1号嫌疑人：印错"><a href="#1号嫌疑人：印错" class="headerlink" title="1号嫌疑人：印错"></a>1号嫌疑人：印错</h3><p>我买的书虽不一定是正版，但错这么离谱好像不太可能。</p>
+<p>无作案动机，排除！<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqwiyvhxuj20bh092mxh.jpg" alt="太天真了"></p>
+<h3 id="2号嫌疑人：indexOf-查找时严格相等的条件"><a href="#2号嫌疑人：indexOf-查找时严格相等的条件" class="headerlink" title="2号嫌疑人：indexOf()查找时严格相等的条件"></a>2号嫌疑人：indexOf()查找时严格相等的条件</h3><p>搜便案发现场，没发现“凶器”类型转换啊？</p>
+<p>有不在场证明，排除！</p>
+<p>僵掉了呀！<br><img src="http://wx2.sinaimg.cn/mw690/a98da548gy1fnqwudwtvkj205k07tt8w.jpg" alt="天真，too"></p>
+<h3 id="3号嫌疑人：引用类型"><a href="#3号嫌疑人：引用类型" class="headerlink" title="3号嫌疑人：引用类型"></a>3号嫌疑人：引用类型</h3><p>人脏具获，束手就擒吧：</p>
+<pre><code class="javascript"><span class="keyword">var</span> person = { <span class="attr">name</span>:  <span class="string">"Nicholas"</span>}; <span class="comment">//person是对象{ name:  "Nicholas"}的引用A，是一个对象指针</span>
 <span class="keyword">var</span> people = [{ <span class="attr">name</span>: <span class="string">"Nicholas"</span>}; <span class="comment">//people是一个包含对象{ name:  "Nicholas"}的另一个引用B的数组</span>
 
 <span class="keyword">var</span> morePeople = [person];         <span class="comment">//morePeople 是一个包含对象{ name:  "Nicholas"}的引用A的数组</span>
 alert(people.indexOf(person));     <span class="comment">//-1，people中只有引用B，没有引用A</span>
 alert(morePeople.indexOf(person)); <span class="comment">//0，people中有引用A</span>
-</code></pre><h2 id="结案"><a href="#结案" class="headerlink" title="结案"></a>结案</h2><p>解决每一个问题，都是对自己的查缺补漏。真好！</p><p>基础，基础，基础！<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqx9a8yyvj209q07ydfv.jpg" alt="真相大白"></p></div><div><div style="padding:10px 0;margin:20px auto;width:90%;text-align:center"><div></div> <button id="rewardButton" disable="enable" onclick='var qr=document.getElementById("QR");"none"===qr.style.display?qr.style.display="block":qr.style.display="none"'> <span>赏</span></button><div id="QR" style="display:none"><div id="wechat" style="display:inline-block"> <img id="wechat_qr" src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnjyj1j9xkj206v06xjrs.jpg" alt="Albert 微信支付"><p>微信支付</p></div><div id="alipay" style="display:inline-block"> <img id="alipay_qr" src="http://wx4.sinaimg.cn/mw690/a98da548gy1fnjyj7gs7ij207907674q.jpg" alt="Albert 支付宝"><p>支付宝</p></div></div></div></div><footer class="post-footer"><div class="post-tags"><i class="fa fa-fw fa-tags"></i> <a href="/tags/对象/" rel="tag">对象</a> <a href="/tags/引用类型/" rel="tag">引用类型</a></div><div class="post-nav"><div class="post-nav-next post-nav-item"><a href="/2018/01/20/hello-world/" rel="next" title="Hello World"><i class="fa fa-chevron-left"></i> Hello World</a></div><span class="post-nav-divider"></span><div class="post-nav-prev post-nav-item"> <a href="/2018/01/30/hello-webpack/" rel="prev" title="遇见webpack">遇见webpack<i class="fa fa-chevron-right"></i></a></div></div></footer></div></article><div class="post-spread"><div class="jiathis_style_24x24"><a class="jiathis_button_weixin"></a><a class="jiathis_button_tsina"></a><a class="jiathis_button_douban"></a><a class="jiathis_button_twitter"></a><a class="jiathis_button_fb"></a><a href="http://www.jiathis.com/share?uid=2155303" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a><a class="jiathis_counter_style"></a></div><script type="text/javascript">var jiathis_config={data_track_clickback:"true"}</script><script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2155303" charset="utf-8"></script></div></div></div><div class="comments" id="comments"><div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwMS85ODU4"></div></div></div></div></main><footer id="footer" class="footer"><div class="footer-inner"><div class="made-by"> <span class="with-love">Maintained with<i class="fa fa-heart"></i></span> <span class="author" itemprop="copyrightHolder">by Albert</span></div><div class="copyright">&copy; <span itemprop="copyrightYear">2018</span> <span class="author" itemprop="copyrightHolder">萧文回忆里的疯狂</span></div><div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div> <span class="post-meta-divider">|</span><div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/AlbertXiao1994/hexo-theme-memory">Memory</a></div></div></footer><div class="back-to-top"><i class="fa fa-paper-plane"></i></div></div><script type="text/javascript">"[object Function]"!==Object.prototype.toString.call(window.Promise)&&(window.Promise=null)</script><script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script><script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script><script type="text/javascript" src="/js/src/utils.js?v=0.0.1"></script><script type="text/javascript" src="/js/src/motion.js?v=0.0.1"></script><script type="text/javascript" src="/js/src/scrollspy.js?v=0.0.1"></script><script type="text/javascript" src="/js/src/post-details.js?v=0.0.1"></script><script type="text/javascript" src="/js/src/bootstrap.js?v=0.0.1"></script><script type="text/javascript">!function(e,t){var n,c=e.getElementsByTagName(t)[0];"function"!=typeof LivereTower&&((n=e.createElement(t)).src="https://cdn-city.livere.com/js/embed.dist.js",n.async=!0,c.parentNode.insertBefore(n,c))}(document,"script")</script><script type="text/javascript">
+</code></pre>
+<h2 id="结案"><a href="#结案" class="headerlink" title="结案"></a>结案</h2><p>解决每一个问题，都是对自己的查缺补漏。真好！</p>
+<p>基础，基础，基础！<br><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnqx9a8yyvj209q07ydfv.jpg" alt="真相大白"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div></div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="http://wx1.sinaimg.cn/mw690/a98da548gy1fnjyj1j9xkj206v06xjrs.jpg" alt="Albert 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="http://wx4.sinaimg.cn/mw690/a98da548gy1fnjyj7gs7ij207907674q.jpg" alt="Albert 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          <i class="fa fa-fw fa-tags"></i>
+          
+            <a href="/tags/对象/" rel="tag"> 对象</a>
+          
+            <a href="/tags/引用类型/" rel="tag"> 引用类型</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/20/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/30/hello-webpack/" rel="prev" title="遇见webpack">
+                遇见webpack <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- JiaThis Button BEGIN -->
+<div class="jiathis_style_24x24">
+  <a class="jiathis_button_weixin"></a>
+  <a class="jiathis_button_tsina"></a>
+  <a class="jiathis_button_douban"></a>
+  <a class="jiathis_button_twitter"></a>
+  <a class="jiathis_button_fb"></a>
+  <a href="http://www.jiathis.com/share?uid=2155303" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+  <a class="jiathis_counter_style"></a>
+</div>
+<script type="text/javascript">
+var jiathis_config = {data_track_clickback:'true'};
+</script>
+<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2155303" charset="utf-8"></script>
+<!-- JiaThis Button END -->
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8zMzMwMS85ODU4"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="made-by">
+  <span class="with-love">
+    Maintained with <i class="fa fa-heart"></i>
+  </span><span class="author" itemprop="copyrightHolder">by Albert</span>
+</div>
+<div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="author" itemprop="copyrightHolder"> 萧文回忆里的疯狂</span>
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/AlbertXiao1994/hexo-theme-memory">Memory</a></div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-paper-plane"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/2.1.3/jquery.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/fastclick/1.0.6/fastclick.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery.lazyload/1.9.3/jquery.lazyload.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.jsdelivr.net/velocity/1.2.3/velocity.ui.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=0.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=0.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=0.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=0.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=0.0.1"></script>
+
+
+
+  
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
     // Popup Window;
     var isfetched = false;
     var isXml = true;
@@ -325,4 +1167,129 @@ alert(morePeople.indexOf(person)); <span class="comment">//0，people中有引�
         onPopupClose();
       }
     });
-  </script><script src="//cdn1.lncld.net/static/js/3.3.1/av-min.js"></script><script>AV.initialize("vi9gBKXXvJMirxRjQNr4iDwE-gzGzoHsz","zMy0jAqAPfFN5oKVYCTBwp2G")</script><script>function showTime(e){var t=new AV.Query(e),r=[],u=$(".leancloud_visitors");u.each(function(){r.push($(this).attr("id").trim())}),t.containedIn("url",r),t.find().then(function(e){var t=".leancloud-visitors-count";if(0!==e.length){for(var n=0;n<e.length;n++){var o=e[n],i=o.get("url"),l=o.get("time"),s=document.getElementById(i);$(s).find(t).text(l)}for(n=0;n<r.length;n++){i=r[n],s=document.getElementById(i);var c=$(s).find(t);""==c.text()&&c.text(0)}}else u.find(t).text(0)}).then(function(e,t){console.log("Error: "+t.code+" "+t.message)})}function addCount(i){var e=$(".leancloud_visitors"),l=e.attr("id").trim(),s=e.attr("data-flag-title").trim(),t=new AV.Query(i);t.equalTo("url",l),t.find().then(function(e){if(0<e.length){var t=e[0];t.fetchWhenSave(!0),t.increment("time"),t.save().then(function(e){$(document.getElementById(l)).find(".leancloud-visitors-count").text(e.get("time"))}).then(function(e,t){console.log("Failed to save Visitor num, with error message: "+t.message)})}else{var n=new i,o=new AV.ACL;o.setPublicReadAccess(!0),o.setPublicWriteAccess(!0),n.setACL(o),n.set("title",s),n.set("url",l),n.set("time",1),n.save().then(function(e){$(document.getElementById(l)).find(".leancloud-visitors-count").text(e.get("time"))}).then(function(e,t){console.log("Failed to create")})}}).then(function(e){console.log("Error:"+e.code+" "+e.message)})}$(function(){var e=AV.Object.extend("Counter");1==$(".leancloud_visitors").length?addCount(e):1<$(".post-title-link").length&&showTime(e)})</script></body></html>
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.3.1/av-min.js"></script>
+  <script>AV.initialize("vi9gBKXXvJMirxRjQNr4iDwE-gzGzoHsz", "zMy0jAqAPfFN5oKVYCTBwp2G");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .then(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .then(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find()
+        .then(function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save()
+              .then(function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              })
+              .then(function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save()
+              .then(function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              })
+              .then(function(newcounter, error) {
+                console.log('Failed to create');
+              });
+          }
+        })
+        .then(function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        })
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

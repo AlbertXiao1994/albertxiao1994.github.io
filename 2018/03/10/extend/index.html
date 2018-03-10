@@ -78,7 +78,7 @@
 
 
 
-  <meta name="keywords" content="vue,weex," />
+  <meta name="keywords" content="继承,ES6," />
 
 
 
@@ -89,24 +89,18 @@
 
 
 
-<meta name="description" content="Weex，一个让我神往已久的技术。终于到了可以谈一谈的地步。接触weex5天了，坑踩了不少，差不多可以算入门了吧！正式说它之前先谈谈web吧！ 前言web开发技术完全可以说是人类历史上的大量优秀科学家、工程师理论与实践的结果，特别能体现互联网精神：共享、开放。它自诞生之日起，就担负着传播人类文化知识的重任。可以说，web完全不输于人类历史上那些响当当的重要发明，比如：蒸汽机、电灯、智能手机。 如果">
-<meta name="keywords" content="vue,weex">
+<meta name="description" content="ES5下的继承1、原型链式1234567function superType () &amp;#123;&amp;#125;function subType () &amp;#123;&amp;#125;subType.protoType = new superType() 特点：子类型的原型为超类型的实例。 缺点：  当继承引用类型的值时，那对该引用类型的值的操作，将反映到所有实例上。  不能对超类型的构造函数传值。   重点">
+<meta name="keywords" content="继承,ES6">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Weex! This is for everyone">
-<meta property="og:url" content="http://alberts.top/2018/03/06/weex-for-everyone/index.html">
+<meta property="og:title" content="谈谈继承——春招读书笔记（一）">
+<meta property="og:url" content="http://alberts.top/2018/03/10/extend/index.html">
 <meta property="og:site_name" content="萧文回忆里的疯狂">
-<meta property="og:description" content="Weex，一个让我神往已久的技术。终于到了可以谈一谈的地步。接触weex5天了，坑踩了不少，差不多可以算入门了吧！正式说它之前先谈谈web吧！ 前言web开发技术完全可以说是人类历史上的大量优秀科学家、工程师理论与实践的结果，特别能体现互联网精神：共享、开放。它自诞生之日起，就担负着传播人类文化知识的重任。可以说，web完全不输于人类历史上那些响当当的重要发明，比如：蒸汽机、电灯、智能手机。 如果">
+<meta property="og:description" content="ES5下的继承1、原型链式1234567function superType () &amp;#123;&amp;#125;function subType () &amp;#123;&amp;#125;subType.protoType = new superType() 特点：子类型的原型为超类型的实例。 缺点：  当继承引用类型的值时，那对该引用类型的值的操作，将反映到所有实例上。  不能对超类型的构造函数传值。   重点">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fp2cenpipej20fi08aq3b.jpg">
-<meta property="og:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fp2cen7kw5j20fh08vdgu.jpg">
-<meta property="og:image" content="http://wx4.sinaimg.cn/mw690/a98da548gy1fp2bbgf623j20xy0cago3.jpg">
-<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/a98da548gy1fp2f8fgaaij20n20hkjrx.jpg">
-<meta property="og:image" content="http://wx3.sinaimg.cn/mw690/a98da548gy1fp2fkqxoe3j20vp0isq3s.jpg">
-<meta property="og:updated_time" content="2018-03-09T03:09:27.619Z">
+<meta property="og:updated_time" content="2018-03-10T13:23:44.116Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Weex! This is for everyone">
-<meta name="twitter:description" content="Weex，一个让我神往已久的技术。终于到了可以谈一谈的地步。接触weex5天了，坑踩了不少，差不多可以算入门了吧！正式说它之前先谈谈web吧！ 前言web开发技术完全可以说是人类历史上的大量优秀科学家、工程师理论与实践的结果，特别能体现互联网精神：共享、开放。它自诞生之日起，就担负着传播人类文化知识的重任。可以说，web完全不输于人类历史上那些响当当的重要发明，比如：蒸汽机、电灯、智能手机。 如果">
-<meta name="twitter:image" content="http://wx1.sinaimg.cn/mw690/a98da548gy1fp2cenpipej20fi08aq3b.jpg">
+<meta name="twitter:title" content="谈谈继承——春招读书笔记（一）">
+<meta name="twitter:description" content="ES5下的继承1、原型链式1234567function superType () &amp;#123;&amp;#125;function subType () &amp;#123;&amp;#125;subType.protoType = new superType() 特点：子类型的原型为超类型的实例。 缺点：  当继承引用类型的值时，那对该引用类型的值的操作，将反映到所有实例上。  不能对超类型的构造函数传值。   重点">
 
 
 
@@ -134,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://alberts.top/2018/03/06/weex-for-everyone/"/>
+  <link rel="canonical" href="http://alberts.top/2018/03/10/extend/"/>
 
 
 
 
 
-  <title>Weex! This is for everyone | 萧文回忆里的疯狂</title>
+  <title>谈谈继承——春招读书笔记（一） | 萧文回忆里的疯狂</title>
   
 
 
@@ -191,7 +185,7 @@
   
 
 
-<div class="site-top-wrapper" style="background-image:url(http://wx1.sinaimg.cn/mw690/a98da548gy1fp2fzv06njj20ge0960tl.jpg)">
+<div class="site-top-wrapper" style="background-image:url(http://wx3.sinaimg.cn/mw690/a98da548gy1fp7wtx46hpj20dw07st98.jpg)">
   
 
   
@@ -199,7 +193,7 @@
       <div class="post-header custom-post-header">
         
         
-          <h2 class="post-title" itemprop="name headline">Weex! This is for everyone</h2>
+          <h2 class="post-title" itemprop="name headline">谈谈继承——春招读书笔记（一）</h2>
         
 
         <div class="post-meta">      
@@ -216,7 +210,7 @@
               
                 <span class="post-meta-item-text">发表</span>
               
-              <time title="创建" class="post-meta-item-time" itemprop="dateCreated datePublished" datetime="2018-03-06T09:40:50+08:00">2018-03-06</time>
+              <time title="创建" class="post-meta-item-time" itemprop="dateCreated datePublished" datetime="2018-03-10T17:54:44+08:00">2018-03-10</time>
             
 
             
@@ -250,7 +244,7 @@
 
           
           
-             <span id="/2018/03/06/weex-for-everyone/" class="leancloud_visitors" data-flag-title="Weex! This is for everyone">
+             <span id="/2018/03/10/extend/" class="leancloud_visitors" data-flag-title="谈谈继承——春招读书笔记（一）">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -486,7 +480,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://alberts.top/2018/03/06/weex-for-everyone/">
+    <link itemprop="mainEntityOfPage" href="http://alberts.top/2018/03/10/extend/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Albert">
@@ -514,64 +508,60 @@
       
 
       
-        <div class="note info"><p>Weex，一个让我神往已久的技术。终于到了可以谈一谈的地步。接触weex5天了，坑踩了不少，差不多可以算入门了吧！正式说它之前先谈谈web吧！</p></div>
-<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>web开发技术完全可以说是人类历史上的大量优秀科学家、工程师理论与实践的结果，特别能体现互联网精神：共享、开放。它自诞生之日起，就担负着传播人类文化知识的重任。可以说，web完全不输于人类历史上那些响当当的重要发明，比如：蒸汽机、电灯、智能手机。</p>
-<p>如果说，我崇拜谁呢，就蒂姆·伯纳斯·李绝对算一个。当初看央视的纪录片<a href="http://tv.sohu.com/20140827/n403819720.shtml" target="_blank" rel="noopener">《互联网时代》</a>，一个场面让我叹为观止：蒂姆·伯纳斯·李在2012年当你编写世界上第一个web服务器和客户端的电脑上敲出“This is for everyone”。</p>
-<p><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fp2cenpipej20fi08aq3b.jpg" alt="《互联网时代》1"></p>
-<p><img src="http://wx1.sinaimg.cn/mw690/a98da548gy1fp2cen7kw5j20fh08vdgu.jpg" alt="《互联网时代》2"></p>
-<p>太帅了！</p>
-<h2 id="为什么是Weex？"><a href="#为什么是Weex？" class="headerlink" title="为什么是Weex？"></a>为什么是Weex？</h2><p>web开放包容、跨平台的特性，带来了互联网的繁荣，但它也有天生的缺点：</p>
+        <h2 id="ES5下的继承"><a href="#ES5下的继承" class="headerlink" title="ES5下的继承"></a>ES5下的继承</h2><h3 id="1、原型链式"><a href="#1、原型链式" class="headerlink" title="1、原型链式"></a>1、原型链式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">superType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">subType.protoType = <span class="keyword">new</span> superType()</span><br></pre></td></tr></table></figure>
+<p>特点：子类型的原型为超类型的实例。</p>
+<p>缺点：</p>
 <ul>
-<li><p>各浏览器厂商对JS标准的实现不同，导致了兼容性问题；</p>
+<li><p>当继承引用类型的值时，那对该引用类型的值的操作，将反映到所有实例上。</p>
 </li>
-<li><p>每次打开网页需要去远程下载，天然地慢一拍；</p>
-</li>
-<li><p>DOM设计的缺陷，每次更新页面浏览器需要进行大量的操作。</p>
+<li><p>不能对超类型的构造函数传值。</p>
 </li>
 </ul>
-<p>在移动互联时代，第一个问题已不那么明显。后两个问题，无法根治。只能不断优化，对于第二个问题一般是采取减小请求数、缓存的机制；对于最后一个问题，现在比较流行的做法是Facebook最早在React中运用的虚拟DOM，还有通过Canvas图的方式。</p>
-<p>而移动互联时代绝对主角——原生应用，它安装在本地，直接运行在系统中，具有高性能，那它有什么缺点呢？主要有二：</p>
-<ul>
-<li><p>平台差异：同一产品一般至少需要开发web、android、ios三端，需要三波开发团队；</p>
-</li>
-<li><p>上线周期慢：一款应用上线一般需要一到几周，而这对时机稍纵即逝的互联网圈基本是不能容忍的。</p>
-</li>
-</ul>
-<p>如果有一个解决方案具有web跨平台、社区繁荣的优点，又兼备原生应用的高性能就好了。</p>
-<p>今天的主角该出场了：Weex们。</p>
-<h2 id="闪亮登场"><a href="#闪亮登场" class="headerlink" title="闪亮登场"></a>闪亮登场</h2><p>Weex们，是社区中诞生的使用web开发过程开发端应用的技术。</p>
-<p>通俗说，就是写一套web前端代码，编译成web、android、ios三端都可用的应用。</p>
-<p>之所以加“们”，是因为除了Weex，社区还有现在最流行的React Native。</p>
-<h2 id="一探究竟"><a href="#一探究竟" class="headerlink" title="一探究竟"></a>一探究竟</h2><p>我在原来学习Vue时做的项目中，选了个难度适中的来做weex重构。</p>
-<h3 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h3><p><img src="http://wx4.sinaimg.cn/mw690/a98da548gy1fp2bbgf623j20xy0cago3.jpg" alt="效果"></p>
-<p>项目源码：<a href="https://github.com/AlbertXiao1994/weex-eleme" target="_blank" rel="noopener">weex-eleme</a></p>
-<h3 id="名存实亡的标签"><a href="#名存实亡的标签" class="headerlink" title="名存实亡的标签"></a>名存实亡的标签</h3><p>weex中，基本上可以说没有标签一说。</p>
-<p>weex只支持一组内置的组件和在内置组件的基础上自定义的组件。</p>
-<p>如果你要写一个weex，首先要做的就是把原来习惯的所有文本相关的标签换成<code>&lt;text&gt;</code>，图片相关的换成<code>&lt;image&gt;</code>。</p>
-<h3 id="CSS的差异"><a href="#CSS的差异" class="headerlink" title="CSS的差异"></a>CSS的差异</h3><p>weex中只支持单个类名，不允许使用关系选择器来定义类名。这一点官方文档里并没有说，但确是网友们踩坑总结出来的经验。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">// 单个类名，允许</span><br><span class="line"><span class="selector-class">.a</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line"> &#125;</span><br><span class="line"></span><br><span class="line">// 关系选择器，无效</span><br><span class="line"><span class="selector-class">.a</span> <span class="selector-class">.b</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>社区里有人成功地通过安装开发依赖和配置webpack的module选项使用了向sass这样的样式预处理器，也有说weex集成了常用的几种css预处理器，直接使用下面这样的标签写样式就行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;style lang=&quot;sass&quot; scope&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="动态绑定类名"><a href="#动态绑定类名" class="headerlink" title="动态绑定类名"></a>动态绑定类名</h3><p>在Vue中，我们通常像下面这样动态绑定类名：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 在weex中，类名可以成功加到渲染后的标签属性中，但样式不起作用</span><br><span class="line">&lt;div class=&quot;nav&quot; :class=&quot;&#123;active: flag&#125;&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<p>这是个比较奇怪的坑，最后找到一个解决方案：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 使用数组语法，数组里可以是三目运算或者函数调用</span><br><span class="line">&lt;div class=&quot;nav&quot; :class=&quot;[flag?&apos;active&apos;:&apos;&apos;]&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="元素内联"><a href="#元素内联" class="headerlink" title="元素内联"></a>元素内联</h3><p>weex中，<code>&lt;text&gt;</code>会被渲染成<code>&lt;p&gt;</code>，<code>&lt;image&gt;</code>会被渲染出<code>&lt;figure&gt;</code>，所有的<code>display</code>属性无法使用。如果你需要达到元素内联的效果，那你可以使用FlexBox：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> &lt;div class=&quot;wrapper&quot;&gt;</span><br><span class="line">    &lt;text&gt;some text&lt;/text&gt;</span><br><span class="line">    // image必须设置宽高</span><br><span class="line">    &lt;image</span><br><span class="line">      style=&quot;width: 300;height: 300;border-width:2px;&quot;       </span><br><span class="line">      src=&quot;https://cn.vuejs.org/images/logo.png1</span><br><span class="line">    &gt;</span><br><span class="line">    &lt;/image&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line"></span><br><span class="line">.wrapper &#123;</span><br><span class="line">  flex-direction: row;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-<h3 id="scroller、list组件的坑"><a href="#scroller、list组件的坑" class="headerlink" title="scroller、list组件的坑"></a>scroller、list组件的坑</h3><p>weex提供了一个高效的适合显示长列表的<code>&lt;list&gt;</code>组件。它在加载包含大量图片的场景下威力就发挥出来了。</p>
-<p>它初始时只会加载首屏的图片，在快滚到底部时再去请求新的图片。但，你<strong>必须给<code>&lt;list&gt;</code>（或者<code>&lt;scroller&gt;</code>）设置一个高度</strong>（水平使用时设置宽度）。</p>
-<p>这个坑我是深有感受，没有给<code>&lt;list&gt;</code>设置高度，你滚动时<code>&lt;list&gt;</code>总是也到不了底部，下部的图片时不会加载的，而且<code>scrollElement</code>方法是不会奏效的。</p>
-<p><img src="http://wx3.sinaimg.cn/mw690/a98da548gy1fp2f8fgaaij20n20hkjrx.jpg" alt="list原理"></p>
-<p>如图所示，你设置的是wrapper的高度，wrapper不动，而content长度是超出wrapper的，你滚动时其实只是content在相对wrapper变化。只有这样，才能获取content相对于wrapper的位置，进行<code>loadmore</code>、<code>scrollElement</code>等事件或方法。</p>
-<p>不然，wrapper的高度是被content撑开的，那它们就一起滚动了。</p>
-<h3 id="文本截断"><a href="#文本截断" class="headerlink" title="文本截断"></a>文本截断</h3><p>在官方的示例中，可以给<code>&lt;text&gt;</code>设置<code>lines</code>属性限制文本的行数：</p>
-<p><img src="http://wx3.sinaimg.cn/mw690/a98da548gy1fp2fkqxoe3j20vp0isq3s.jpg" alt="官方示例"></p>
-<p>其中有一个错误，就是<code>lines</code>设置在标签上是没有用的，<strong>而只有通过类名指定才会起效</strong>。he</p>
-<p>然而，我电脑上并没有什么用！囧。</p>
-<p>如果你的电脑也不起效，你可以像下面这样：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;text class=&quot;text&quot;&gt;</span><br><span class="line">  some text some text some text some text some text some text</span><br><span class="line">&lt;/text&gt;</span><br><span class="line"></span><br><span class="line">.text &#123;</span><br><span class="line">  // 设置在css里，不一定起效</span><br><span class="line">  lines: 1</span><br><span class="line">  // 替代方案，官方示例渲染后的真实属性</span><br><span class="line">  -webkit-line-clapm: 1;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="占坑"><a href="#占坑" class="headerlink" title="占坑"></a>占坑</h3><p>bug常有，坑常有，来日填。</p>
-
+<p>重点说下第一点。</p>
+<p>一开始，我没有完全懂第一点的含义。</p>
+<p>《JS高程》上有个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">superType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.color=[<span class="string">'red'</span>, <span class="string">'blue'</span>, <span class="string">'green'</span>]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">subType.protoType = <span class="keyword">new</span> superType()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类型实例1</span></span><br><span class="line"><span class="keyword">var</span> instantce1 = <span class="keyword">new</span> subType()</span><br><span class="line">instantce1.color.push(<span class="string">'black'</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 子类型实例2</span></span><br><span class="line"><span class="keyword">var</span> instantce2 = <span class="keyword">new</span> subType()</span><br><span class="line"><span class="built_in">console</span>.log(instantce2.color) <span class="comment">// ['red', 'blue', 'green', 'black']</span></span><br></pre></td></tr></table></figure>
+<p>子实例2受到了子实例1的影响。原因是color是个引用，定义在原型上，为所有实例共享。</p>
+<p>看上去好像是懂了，其实呢？</p>
+<p>不信，问个问题：基本类型的属性也被所有实例共享，那为什么只有引用类型是原型链式的缺点？</p>
+<p>来看看下面这个例子：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.num = <span class="number">1</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">B</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">B.prototype = <span class="keyword">new</span> A()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b1 = <span class="keyword">new</span> B()</span><br><span class="line">b1.num = <span class="number">2</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> b2 = <span class="keyword">new</span> B()</span><br><span class="line"><span class="built_in">console</span>.log(b2.num) <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
+<p>哎呀，<code>b2.num</code>的值确实没有被影响！</p>
+<p>原因在于，<code>b1.num</code>和<code>b2.num</code>根本不是一个东西。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">b1.num <span class="comment">// 新定义在实例b1上，为实例属性</span></span><br><span class="line">b2.num <span class="comment">// 从原型那找到的属性</span></span><br></pre></td></tr></table></figure>
+<p>也就是说，对于基本类型的属性，你压根就没有办法改变它的值。其实，对于引用类型的属性，你只是也能通过引用类型自身的方法改变它的值。要是直接赋值的话，一样歇菜。</p>
+<p>话说回来，直接赋值那还不如直接定义，没必要继承了。</p>
+<p>那有什么办法既继承，又规避上面的缺点呢？借用构造函数。</p>
+<h3 id="借用构造函数"><a href="#借用构造函数" class="headerlink" title="借用构造函数"></a>借用构造函数</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">superType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  superType.call(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>直接在子类型中调用超类型的构造函数，那每个子类型实例都拥有它自己的继承而来的属性了。而且，你还可以调用超类型构造函数时给它传值。</p>
+<p>问题看似都解决了。可新的问题又来了：超类型的方法无法复用，或者说每次新建实例时都需要新建一次，这会带来额外的开销。</p>
+<h3 id="组合式"><a href="#组合式" class="headerlink" title="组合式"></a>组合式</h3><p>组合式继承结合了前两种的优点，是最常用的方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">superType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  superType.call(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">subType.protoType = <span class="keyword">new</span> superType()</span><br><span class="line">subType.protoType.constructor = superType</span><br></pre></td></tr></table></figure>
+<p>这种方法好在哪呢？</p>
+<p>它的目的是：从通过原型链继承方法，通过借用构造函数得到实例自有的继承属性。</p>
+<p>它的方法是：先通过原型链继承<em>原型方法和属性</em>,通过借用构造函数覆盖它原型里的属性。</p>
+<p>因为实例里就有需要的属性，永远也不会跑去原型那找了。</p>
+<p>这种方法也有问题：它调用了两次超类型构造函数，还产生了一些永远也用不上的原型属性。</p>
+<h3 id="原型式"><a href="#原型式" class="headerlink" title="原型式"></a>原型式</h3><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">object</span> (<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">f</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  f.prototype = o</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> f()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这种方法我觉得并没多特别的。</p>
+<p>它的用处就是可以得到有用对象o的一个副本。</p>
+<p>你有没有发现它和原型链是很像，连名字都很接近。</p>
+<p>当使用原型链法，如果子类型的构造函数是空的时，它们就是一样的。</p>
+<p>区别也就出来了：原型式得到一个已有对象的副本，什么共享引用类型、不能传值这些问题它都有；而原型链式，可以在子类型的构造函数里定义一些自有属性方法。</p>
+<h3 id="寄生式"><a href="#寄生式" class="headerlink" title="寄生式"></a>寄生式</h3><p>它和原型式很像，只是多做一点步骤，所谓的增强返回的实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createAnother</span> (<span class="params">o</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> clone = object(o)</span><br><span class="line">  clone.newMethod = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">  <span class="keyword">return</span> clone</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="寄生组合式"><a href="#寄生组合式" class="headerlink" title="寄生组合式"></a>寄生组合式</h3><p>还有最后一种，它最强大，集各家所长。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">superType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">superType.someMethod = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">subType</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  superType.call(<span class="keyword">this</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">inherit (subType, SurperType)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">inherit</span> (<span class="params">subType, superType</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> protytype = object(superType.protytype)</span><br><span class="line">  subType.protoType = protytype</span><br><span class="line">  subType.protoType.constructor = superType</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>它直接从超类型原型那继承方法，而组合式其实是在原型链上查找方法来继承。</p>
+<h2 id="ES5和ES6继承的不同"><a href="#ES5和ES6继承的不同" class="headerlink" title="ES5和ES6继承的不同"></a>ES5和ES6继承的不同</h2><p>ES6引入了类的概念，但其实它只是ES5的一个语法糖。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ES5</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">A</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.name = <span class="string">"Albert"</span></span><br><span class="line">&#125;</span><br><span class="line">A.protytype.getName = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">this</span>.name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// ES6</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;</span><br><span class="line">    thsi.name = <span class="string">"Albert"</span></span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  getName () &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typeof</span> A <span class="comment">// 'function'</span></span><br><span class="line">A === A.protytype.constructor <span class="comment">// true</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = <span class="keyword">new</span> A()</span><br></pre></td></tr></table></figure>
+<p>类A是个函数，它指向构造函数。</p>
+<p>在ES5中，构造函数负责返回实例。而ES6中，这部分功能由construtor方法完成。</p>
+<p>ES6中继承像这样：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Child</span> <span class="keyword">extends</span> <span class="title">Parent</span> </span>&#123;</span><br><span class="line">  <span class="keyword">constructor</span> () &#123;</span><br><span class="line">    <span class="keyword">super</span>()</span><br><span class="line">    <span class="keyword">this</span>.age = <span class="string">"24"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>super</code>用作函数时，指父类的<code>construtor</code>方法。<code>super</code>用作对象时，在普通函数中指向父类原型；在静态方法中，指向父类。</p>
+<p>子类同时具有<code>__proto__</code>和<code>prototype</code>属性。<code>__proto__</code>属性指向父类，<code>prototype</code>属性指向父类原型的实例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span> <span class="keyword">extends</span> <span class="title">A</span> </span>&#123;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">B.__proto__ === A <span class="comment">// true</span></span><br><span class="line">B.prototype.__proto__ === A.prototype <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -622,9 +612,9 @@
         <div class="post-tags">
           <i class="fa fa-fw fa-tags"></i>
           
-            <a href="/tags/vue/" rel="tag"> vue</a>
+            <a href="/tags/继承/" rel="tag"> 继承</a>
           
-            <a href="/tags/weex/" rel="tag"> weex</a>
+            <a href="/tags/ES6/" rel="tag"> ES6</a>
           
         </div>
       
@@ -637,8 +627,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/28/react-meet-vue/" rel="next" title="Albert Music穿上React新衣——记一次Vue项目重构经历">
-                <i class="fa fa-chevron-left"></i> Albert Music穿上React新衣——记一次Vue项目重构经历
+              <a href="/2018/03/10/read-vue-router-source/" rel="next" title="vue router的原理——春招读书笔记（一）">
+                <i class="fa fa-chevron-left"></i> vue router的原理——春招读书笔记（一）
               </a>
             
           </div>
@@ -646,10 +636,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/03/10/read-vue-router-source/" rel="prev" title="vue router的原理——春招读书笔记（一）">
-                vue router的原理——春招读书笔记（一） <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
