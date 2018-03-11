@@ -4,11 +4,59 @@
 
     
   <url>
-    <loc>http://alberts.top/2018/03/11/optimization/</loc>
-    <lastmod>2018-03-11T06:48:23.166Z</lastmod>
+    <loc>http://alberts.top/2018/03/11/async-programming/</loc>
+    <lastmod>2018-03-11T13:34:35.537Z</lastmod>
     <data>
         <display>
-        <title>Scroll组件原理和优化</title>
+        <title>异步编程——春招读书笔记（五）</title>
+        <pubTime>2018-03-11T13:15:22.000Z</pubTime>
+        
+        <tag>Promise</tag>
+         
+        <tag>Generator</tag>
+         
+        <tag>async</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://alberts.top/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://alberts.top/2018/03/11/talk-others/</loc>
+    <lastmod>2018-03-11T13:33:51.243Z</lastmod>
+    <data>
+        <display>
+        <title>杂七杂八——春招读书笔记（四）</title>
+        <pubTime>2018-03-11T08:00:31.000Z</pubTime>
+        
+        <tag>ES6</tag>
+         
+        <tag>vue</tag>
+         
+        <tag>HTTP</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://alberts.top/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://alberts.top/2018/03/11/optimization/</loc>
+    <lastmod>2018-03-11T06:53:15.864Z</lastmod>
+    <data>
+        <display>
+        <title>Scroll组件原理和优化——春招读书笔记（三）</title>
         <pubTime>2018-03-11T01:31:43.000Z</pubTime>
         
         <tag>scroll</tag>
