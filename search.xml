@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Vue和Weex——春招读书笔记（六）]]></title>
+    <url>%2F2018%2F03%2F12%2Fvue-and-weex%2F</url>
+    <content type="text"><![CDATA[Vue数据绑定实现原理 一句话概括：利用Object.defineProperty重写数据的setter、getter，结合发布-订阅模式，当数据变化时，发布消息，调用回调函数更新视图。 它有三个核心模块：  Observer：观测数据，发布消息。 Compile：编译模板，添加订阅者，绑定更新函数。 Watcher：产生订阅者实例，执行绑定的回调函数更新视图。 Observer它通过defineReactive()函数递归给data的属性、子属性设置setter、getter。在setter、getter里通过一个Dep对象实现发布-订阅功能。Dep对象实例有一个订阅者集合数组，以及一个notify方法。 每个订阅者是一个订阅者，都是一个Watcher对象实例，对应Vue里定义的一条数据。 当设置新值时将会调用notify方法，它会依次触发订阅者的update函数。 那我们来看看Watcher实例又是如何关联节点的呢？奥秘在Compile里。 Compile它干两件事：  将挂载节点下的所有子节点加入documentFragment。 编译模板，给每条数据新建一个Watcher实例，绑定更新回调函数。 将批处理后的documentFragment一次性插入挂载的根节点。 重点讲讲它是如何编译模板的。 它遍历每一子节点，依次取出它的所有属性attribution。如果是指令，通过substring(2)取出指令类型，通过正则表达式取出指令内容。对于事件指令，则注册给该节点注册事件；如果是其他类型的，则生成一个Watcher实例，传入Vue实例，数据，回调。 Watcher实例化时，会调用自身的get方法，它通过将Dep.target属性临时赋值为当前Watcher实例。这样就建立起了订阅者与节点的关系。 Watcher每个Watcher都有一个update方法，前面已经说过了，它在数据更新时将会调用，而它将会执行更新视图的回调函数，实现视图响应数据变化。 Weex区别：浏览器，HTML，客户端，JS Bundle，还需适配和页面生命周期相关的行为，如创建、刷新、销毁。 解决平台接口差异：提供Weex DOM API适配不同前端框架，针对Weex和浏览器也调用不同的接口实现跨平台渲染。根据VDOM构建渲染指令树，它是遵照W3C标准对DOM的精简。它可以序列化为JSON格式以渲染指令的形式发送给原生渲染引擎。 不同的 Weex 页面对应到浏览器上就相当于不同的“标签页”， 在 JS Framework 中实现了 JS Service （http://weex-project.io/cn/references/js-service.html）的功能，主要就是用来解决跨页面复用和状态共享的问题的。 事件传递： Vue调用JS Framework提供的addEvent将事件类型、回调函数传递给JS Framework。JS Framework在构建渲染树是，将事件类型添加至节点中。将在原生组件上将监听这一事件。事件触发时通过fireElemt节点信息回传给JS Framework，在JS Framework里执行。 这种方式效率很低，可能一次触发多次执行回调。可以表达式绑定将回调以字符串的形式直接传给客户端。]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>Vue</tag>
+        <tag>Weex</tag>
+        <tag>Object.defineProperty</tag>
+        <tag>观察者模式</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[异步编程——春招读书笔记（五）]]></title>
     <url>%2F2018%2F03%2F11%2Fasync-programming%2F</url>
     <content type="text"><![CDATA[ES5异步编程 回调函数 注册事件 发布-订阅模式 Promise（我并没有在ES5接触过） ES6异步编程Promise它有三种状态：pending、fullfilled、reject。 用法： 12345678let promise = new Promise(function() &#123; $.getJSON('url', function(data) resolve(data)) &#125;)promise.then((res) =&gt; &#123; console.log(res.data) &#125;) 有一点需要注意： 1234567891011121314151617setTimeout(function () &#123; console.log(3);&#125;, 0);new Promise((resolve, reject) =&gt; &#123; resolve(4); console.log(2);&#125;).then(r =&gt; &#123; console.log(r);&#125;);console.log(1);// 2// 1// 4// 3 它的参数函数是同步执行的，所以最早打印4，接着是同步打印1。 这个Promise是直接resolve的，它将在本轮事件循环的结束时执行，而setTimeout将在下一轮事件循环的开始时执行。 generator函数1234567891011function * gen() &#123; yield '1' yield '2' return '3'&#125;var g = gen()g.next() // &#123;value: '1', done: false&#125;g.next() // &#123;value: '2', done: false&#125;g.next() // &#123;value: '3', done: true&#125; 执行generator函数返回Iterator对象。调用next方法控制它的进行。 再上自动执行器，它就可以完成自动完成异步操作。 有两种方法： Thunk函数 Co模块 Thunk函数把多参数函数变成单参数函数，而这个参数就是异步回调。如下面定义一个用于异步读取文件的Thunk函数： 123456789101112const Thunk = function (fn) &#123; return function(...args) &#123; return function(callback) &#123; return fn.call(this, ...args, callback) &#125; &#125;&#125;var readFileThunk = Thunk(fs.readFile)// 调用readFileThunk('./1.png')(callback) 定义我们需要的生成器函数： 123456var gen = function* ()&#123; var r1 = yield readFileThunk('/etc/fstab'); console.log(r1.toString()); var r2 = yield readFileThunk('/etc/shells'); console.log(r2.toString());&#125;; 那怎么让它自动执行呢？ 12345678910111213141516function run (fn) &#123; // 返回迭代器对象，指针在生成器函数头部 var gen = fn() // next为异步操作的回调函数 function next(err, data) &#123; var result = gen.next(data); if (result.done) return; // 传入回调函数，执行 result.value(next); &#125; next();&#125;run (gen) 还可以通过Co模块实现自动化。 它有两种方法：一是通过Promise，而是通过Thunk。 讲讲Promise怎么实现。关键点两个：一是yield返回Promise；二是next函数里通过then继续进行。 1234567891011121314151617var fs = require('fs');var readFile = function (fileName)&#123; return new Promise(function (resolve, reject)&#123; fs.readFile(fileName, function(error, data)&#123; if (error) return reject(error); resolve(data); &#125;); &#125;);&#125;;var gen = function* ()&#123; var f1 = yield readFile('/etc/fstab'); var f2 = yield readFile('/etc/shells'); console.log(f1.toString()); console.log(f2.toString());&#125;; 上面是第一个关键点。 1234567891011121314151617function run(gen)&#123; // 返回迭代器对象，指针在生成器函数头部 var g = gen(); function next(data)&#123; var result = g.next(data); if (result.done) return result.value; // 给它注册then方法，传入next方法，执行promise result.value.then(function(data)&#123; next(data); &#125;); &#125; next();&#125;run(gen); async函数async函数它就是generate函数的语法糖。 1234const asyncReadFile = async function () &#123; const f1 = await fs.readFile('./1.txt') const f2 = await fs.readFile('./2.txt')&#125; 它更加简洁、语义化，自动执行，而且返回Promise对象。 而它的原理，就是Co模块的Promise式嘛 好了，到此你就可以愉快地异步编程了！]]></content>
@@ -60,8 +74,8 @@
       </categories>
       <tags>
         <tag>vue</tag>
-        <tag>vue router</tag>
         <tag>观察者模式</tag>
+        <tag>vue router</tag>
       </tags>
   </entry>
   <entry>
