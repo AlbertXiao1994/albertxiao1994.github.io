@@ -18,9 +18,9 @@ cover: http://wx3.sinaimg.cn/mw690/a98da548gy1fpa1oybt5pj20zk0p5jtq.jpg
 
 它有三个核心模块：
 
- Observer：观测数据，发布消息。
- Compile：编译模板，添加订阅者，绑定更新函数。
- Watcher：产生订阅者实例，执行绑定的回调函数更新视图。
+* Observer：观测数据，发布消息。
+* Compile：编译模板，添加订阅者，绑定更新函数。
+* Watcher：产生订阅者实例，执行绑定的回调函数更新视图。
 
 ### Observer
 它通过`defineReactive()`函数递归给`data`的属性、子属性设置`setter`、`getter`。在`setter`、`getter`里通过一个Dep对象实现发布-订阅功能。Dep对象实例有一个订阅者集合数组，以及一个`notify`方法。
@@ -33,7 +33,7 @@ cover: http://wx3.sinaimg.cn/mw690/a98da548gy1fpa1oybt5pj20zk0p5jtq.jpg
 
 ### Compile
 
-它干两件事：
+它干三件事：
 
  将挂载节点下的所有子节点加入`documentFragment`。
  编译模板，给每条数据新建一个Watcher实例，绑定更新回调函数。
@@ -56,7 +56,7 @@ Watcher实例化时，会调用自身的`get`方法，它通过将Dep.target属�
 解决平台接口差异：
 提供Weex DOM API适配不同前端框架，针对Weex和浏览器也调用不同的接口实现跨平台渲染。根据VDOM构建渲染指令树，它是遵照W3C标准对DOM的精简。它可以序列化为JSON格式以渲染指令的形式发送给原生渲染引擎。
 
-不同的 Weex 页面对应到浏览器上就相当于不同的“标签页”， 在 JS Framework 中实现了 JS Service （http://weex-project.io/cn/references/js-service.html）的功能，主要就是用来解决跨页面复用和状态共享的问题的。
+不同的 Weex 页面对应到浏览器上就相当于不同的“标签页”， 在 JS Framework 中实现了[JS Service](http://weex-project.io/cn/references/js-service.html)的功能，主要就是用来解决跨页面复用和状态共享的问题的。
 
 事件传递：
 
