@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://alberts.top/2018/03/12/vue-and-weex/</loc>
-    <lastmod>2018-03-12T07:03:17.944Z</lastmod>
+    <lastmod>2018-03-13T10:36:05.610Z</lastmod>
     <data>
         <display>
         <title>Vue和Weex——春招读书笔记（六）</title>
@@ -131,9 +131,9 @@
         <title>vue router的原理——春招读书笔记（一）</title>
         <pubTime>2018-03-10T07:45:14.000Z</pubTime>
         
-        <tag>vue</tag>
-         
         <tag>观察者模式</tag>
+         
+        <tag>vue</tag>
          
         <tag>vue router</tag>
          
