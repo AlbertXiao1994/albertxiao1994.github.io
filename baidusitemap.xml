@@ -4,6 +4,30 @@
 
     
   <url>
+    <loc>http://alberts.top/2018/03/11/optimization/</loc>
+    <lastmod>2018-03-14T13:36:20.404Z</lastmod>
+    <data>
+        <display>
+        <title>Scroll组件原理和优化——春招读书笔记（三）</title>
+        <pubTime>2018-03-11T01:31:43.000Z</pubTime>
+        
+        <tag>scroll</tag>
+         
+        <tag>懒加载</tag>
+         
+        <tag>性能优化</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://alberts.top/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://alberts.top/2018/03/12/vue-and-weex/</loc>
     <lastmod>2018-03-13T10:36:05.610Z</lastmod>
     <data>
@@ -11,13 +35,13 @@
         <title>Vue和Weex——春招读书笔记（六）</title>
         <pubTime>2018-03-12T04:32:17.000Z</pubTime>
         
+        <tag>观察者模式</tag>
+         
         <tag>Vue</tag>
          
         <tag>Weex</tag>
          
         <tag>Object.defineProperty</tag>
-         
-        <tag>观察者模式</tag>
          
          
            
@@ -78,30 +102,6 @@
 
     
   <url>
-    <loc>http://alberts.top/2018/03/11/optimization/</loc>
-    <lastmod>2018-03-11T06:53:15.864Z</lastmod>
-    <data>
-        <display>
-        <title>Scroll组件原理和优化——春招读书笔记（三）</title>
-        <pubTime>2018-03-11T01:31:43.000Z</pubTime>
-        
-        <tag>scroll</tag>
-         
-        <tag>懒加载</tag>
-         
-        <tag>性能优化</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="http://alberts.top/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://alberts.top/2018/03/10/extend/</loc>
     <lastmod>2018-03-10T13:36:54.228Z</lastmod>
     <data>
@@ -131,11 +131,11 @@
         <title>vue router的原理——春招读书笔记（一）</title>
         <pubTime>2018-03-10T07:45:14.000Z</pubTime>
         
-        <tag>观察者模式</tag>
-         
         <tag>vue</tag>
          
         <tag>vue router</tag>
+         
+        <tag>观察者模式</tag>
          
          
            
