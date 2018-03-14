@@ -38,7 +38,29 @@ cover: http://wx3.sinaimg.cn/mw690/a98da548gy1fp8vkntij8j20go06idg7.jpg
 
 * offsetWidth：元素高度
 
-或许，我们可以先将父元素相对定位，然后比较`-offsetTop`是否等于`offsetWidth`，这样就可以判断是否到底部了。
+或许，我们可以先将父元素相对定位，然后比较`offsetTop`是否等于`offsetHeight`，这样就可以判断是否到底部了。
+
+Better-Scroll给`scroll`事件注册一个校验是否到底部的回调函数，当到达底部时，触发默认绑定的自定义事件`scrollEnd`：
+
+```js
+ BScroll.prototype._watchPullUp = function () {
+    this.pullupWatching = true
+    const {threshold = 0} = this.options.pullUpLoad
+
+    this.on('scroll', checkToEnd)
+
+    function checkToEnd(pos) {
+      if (this.movingDirectionY === DIRECTION_UP && pos.y <= (this.maxScrollY + threshold)) {
+        // reset pullupWatching status after scroll end.
+        this.once('scrollEnd', () => {
+          this.pullupWatching = false
+        })
+        this.trigger('pullingUp')
+        this.off('scroll', checkToEnd)
+      }
+    }
+  }
+```
 
 ![局部滚动](http://wx3.sinaimg.cn/mw690/a98da548gy1fp2f8fgaaij20n20hkjrx.jpg)
 
