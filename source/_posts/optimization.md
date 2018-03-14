@@ -204,3 +204,46 @@ export function debounce(func, delay) {
 它通过一个闭包，延长了局部变量`timer`是寿命，还保证在一个延迟时间内只有一次函数调用。
 
 通过它，你就可以避免短时间内大量触发引发大量性能消耗的`scroll`事件了。
+
+那能不能再进一步呢？
+
+谷歌浏览器前两年发布了一个新功能：给`addEventListener`添加`{passive:true}`选项，将大大提升页面滚动的性能：
+
+```js
+// 通知浏览器当scroll事件执行时，忽略所有的阻止默认事件语句
+addEventListener('scroll', {passive:true})
+
+// vue.js中你可以这样写
+<div v-on:scroll.passive="onScroll">...</div>
+```
+
+在React中，我暂时没有找到设置这个属性的方法。
+
+不过，在我看Better-Scroll组件源码时，发现它原生绑定`scroll`事件时就已经设置了，不过它设置为了`false`：
+
+```js
+export function addEvent(el, type, fn, capture) {
+  el.addEventListener(type, fn, {passive: false, capture: !!capture})
+}
+```
+
+我尝试着修改源码，将它设置为`{passive: true}`。似乎确实可以感受到滑动的流畅提升。
+
+为了测试兼容性，我决定使用`Vue`里的做法：
+
+```js
+try {
+    const opts = {}
+    Object.defineProperty(opts, 'passive', ({
+      get () {
+        /* istanbul ignore next */
+        supportsPassive = true
+      }
+    } : Object))
+    window.addEventListener('test-passive', null, opts)
+  } catch (e) {
+    if (type === 'touchstart') {
+      el.addEventListener(type, fn, {passive: false, capture: !!capture})
+    }
+  }
+```
