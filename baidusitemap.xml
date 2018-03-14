@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://alberts.top/2018/03/11/optimization/</loc>
-    <lastmod>2018-03-14T13:36:20.404Z</lastmod>
+    <lastmod>2018-03-14T14:38:50.471Z</lastmod>
     <data>
         <display>
         <title>Scroll组件原理和优化——春招读书笔记（三）</title>
@@ -35,9 +35,9 @@
         <title>Vue和Weex——春招读书笔记（六）</title>
         <pubTime>2018-03-12T04:32:17.000Z</pubTime>
         
-        <tag>观察者模式</tag>
-         
         <tag>Vue</tag>
+         
+        <tag>观察者模式</tag>
          
         <tag>Weex</tag>
          
