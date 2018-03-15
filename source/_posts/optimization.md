@@ -232,6 +232,7 @@ export function addEvent(el, type, fn, capture) {
 为了测试兼容性，我决定使用`Vue`里的做法：
 
 ```js
+var supportsPassive = false
 try {
     const opts = {}
     Object.defineProperty(opts, 'passive', ({
@@ -241,9 +242,12 @@ try {
       }
     } : Object))
     window.addEventListener('test-passive', null, opts)
-  } catch (e) {
-    if (type === 'touchstart') {
-      el.addEventListener(type, fn, {passive: false, capture: !!capture})
-    }
-  }
+  } catch (e) {}
+
+// 注册事件
+if (type === 'touchstart' || type === 'touchmove' || type === 'touchstart') {
+    el.removeEventListener(type, fn, supportPassive ? { passive:true } : false)
+  } 
 ```
+
+上面代码，先检测浏览器是否支持Passive Event API。它是通过修改变量`supportsPassive`的`getter`取值器函数，当浏览器去调用它时，将会把`supportsPassive`置为真。注册事件时，就可以通过它来判断是否支持这个API了。
