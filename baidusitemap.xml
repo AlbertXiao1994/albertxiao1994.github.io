@@ -5,7 +5,7 @@
     
   <url>
     <loc>http://alberts.top/2018/03/11/optimization/</loc>
-    <lastmod>2018-03-14T14:38:50.471Z</lastmod>
+    <lastmod>2018-03-15T07:50:29.085Z</lastmod>
     <data>
         <display>
         <title>Scroll组件原理和优化——春招读书笔记（三）</title>
@@ -85,9 +85,9 @@
         <title>杂七杂八——春招读书笔记（四）</title>
         <pubTime>2018-03-11T08:00:31.000Z</pubTime>
         
-        <tag>ES6</tag>
-         
         <tag>vue</tag>
+         
+        <tag>ES6</tag>
          
         <tag>HTTP</tag>
          
@@ -109,9 +109,9 @@
         <title>谈谈继承——春招读书笔记（二）</title>
         <pubTime>2018-03-10T09:54:44.000Z</pubTime>
         
-        <tag>继承</tag>
-         
         <tag>ES6</tag>
+         
+        <tag>继承</tag>
          
          
            
