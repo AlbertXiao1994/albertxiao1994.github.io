@@ -1,6 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[未来几个月学习计划]]></title>
+    <url>%2F2018%2F03%2F19%2Flearn-plan-in-the-future%2F</url>
+    <content type="text"><![CDATA[过去一周，面了几轮，自我感觉还好。当我回想过去的努力时，暂时可以感到欣慰了。结果嘛，不知道，应该不会太坏。现在要做的就是不断努力、继续学习，毕竟不会的永远比会的多。就先从半年的规划做起吧！这样具体点。 React和Rax时间：3月19日-3月28日 资料：官方文档 发现阿里内部还是用React居多，哪怕Weex一开始是为Vue定制的。React还得继续学下去。 首先，我要继续研读React文档，当初采用“走着瞧”的战略，提高了框架入门的效率，但是还有不少章节知之甚少。现在差不多对React有了一定的了解，也做了一个完整的项目，是时候仔细全面的再学习一遍了。 其次，Immutable.js在Redux的应用、动画切换等方面，我都需要再研究下。 接着，就是团队技术栈相关——Rax。Rax阿里内部很多部门在用，我打算用一周左右的时间去学习一遍。学习方法呢，这次就不做一个完整的项目了，而是使用官方提供的Playgound。 Node实践时间：3月29日——4月15日 资料：《了不起的Node.js》、官方文档 之前，已经看过一本郭家宝的《Node.js开发指南》，但当时并没有动手实践。下阶段，Node实践必须提上日程。落脚点呢，就是一直想给我妈做的订单系统。 技术选型打算是Node+mpVue+微信小程序+MongoDB。一来，一个全栈项目是对自己很大的锻炼；二来，实践Node；三来，完成一个很久以来的心愿。 设计模式时间：3月19日——3月30日 资料：《Javascript设计模式与开发实践》 曾探的那本设计模式，已经看了有一段时间了。这期间，由于准备面试导致进度缓慢。我给自己定个目标吧，每天看一章。 数据结构与算法时间：3月31日——4月30日 资料：《学习Javascrpit数据结构与算法》、《剑指Offer》 数据结构在16年时就啃过一点时间，后来又搁置了。这是少不了的。我打算再学一遍。 书买来一直没看，虽然自己在网上看了并整理了一些基础的数据结构JS的实现，但总觉得不算系统。该看了！ 我打算这期间呢，结合牛客网《剑指Offer》的33道题来学习。不用带着功利心来刷题，这样感觉不错。 有些东西看不到，但却无时不在。 Node深入时间：5月1日——6月1日 资料：《深入浅出Node.js》 PWA时间：6月1日——6月30日 前几天面试，问到了PWA相关的问题。我仅对它有个宏观的认识。听TL说未来打算尝试PWA。可以，很酷，学起。]]></content>
+      <categories>
+        <category>随笔</category>
+      </categories>
+      <tags>
+        <tag>node</tag>
+        <tag>Rax</tag>
+        <tag>数据结构</tag>
+        <tag>设计模式</tag>
+        <tag>PWA</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Vue和Weex——春招读书笔记（六）]]></title>
     <url>%2F2018%2F03%2F12%2Fvue-and-weex%2F</url>
     <content type="text"><![CDATA[Vue数据绑定实现原理 一句话概括：利用Object.defineProperty重写数据的setter、getter，结合发布-订阅模式，当数据变化时，发布消息，调用回调函数更新视图。 它有三个核心模块： Observer：观测数据，发布消息。 Compile：编译模板，添加订阅者，绑定更新函数。 Watcher：产生订阅者实例，执行绑定的回调函数更新视图。 Observer它通过defineReactive()函数递归给data的属性、子属性设置setter、getter。在setter、getter里通过一个Dep对象实现发布-订阅功能。Dep对象实例有一个订阅者集合数组，以及一个notify方法。 每个订阅者是一个订阅者，都是一个Watcher对象实例，对应Vue里定义的一条数据。 当设置新值时将会调用notify方法，它会依次触发订阅者的update函数。 那我们来看看Watcher实例又是如何关联节点的呢？奥秘在Compile里。 Compile它干三件事：  将挂载节点下的所有子节点加入documentFragment。 编译模板，给每条数据新建一个Watcher实例，绑定更新回调函数。 将批处理后的documentFragment一次性插入挂载的根节点。 重点讲讲它是如何编译模板的。 它遍历每一子节点，依次取出它的所有属性attribution。如果是指令，通过substring(2)取出指令类型，通过正则表达式取出指令内容。对于事件指令，则注册给该节点注册事件；如果是其他类型的，则生成一个Watcher实例，传入Vue实例，数据，回调。 Watcher实例化时，会调用自身的get方法，它通过将Dep.target属性临时赋值为当前Watcher实例。这样就建立起了订阅者与节点的关系。 Watcher每个Watcher都有一个update方法，前面已经说过了，它在数据更新时将会调用，而它将会执行更新视图的回调函数，实现视图响应数据变化。 Weex区别：浏览器，HTML，客户端，JS Bundle，还需适配和页面生命周期相关的行为，如创建、刷新、销毁。 解决平台接口差异：提供Weex DOM API适配不同前端框架，针对Weex和浏览器也调用不同的接口实现跨平台渲染。根据VDOM构建渲染指令树，它是遵照W3C标准对DOM的精简。它可以序列化为JSON格式以渲染指令的形式发送给原生渲染引擎。 不同的 Weex 页面对应到浏览器上就相当于不同的“标签页”， 在 JS Framework 中实现了JS Service的功能，主要就是用来解决跨页面复用和状态共享的问题的。 事件传递： Vue调用JS Framework提供的addEvent将事件类型、回调函数传递给JS Framework。JS Framework在构建渲染树是，将事件类型添加至节点中。将在原生组件上将监听这一事件。事件触发时通过fireElemt节点信息回传给JS Framework，在JS Framework里执行。 这种方式效率很低，可能一次触发多次执行回调。可以表达式绑定将回调以字符串的形式直接传给客户端。]]></content>
@@ -35,8 +50,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>vue</tag>
         <tag>ES6</tag>
+        <tag>vue</tag>
         <tag>HTTP</tag>
       </tags>
   </entry>
@@ -61,8 +76,8 @@
         <category>前端</category>
       </categories>
       <tags>
-        <tag>ES6</tag>
         <tag>继承</tag>
+        <tag>ES6</tag>
       </tags>
   </entry>
   <entry>
