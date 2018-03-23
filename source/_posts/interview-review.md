@@ -5,7 +5,7 @@ categories: 前端
 tags:
 - 递归
 - CSS
-cover: http://wx3.sinaimg.cn/mw690/a98da548gy1fplfmo4ozrj21400gcmyd.jpg
+cover: http://wx1.sinaimg.cn/mw690/a98da548gy1fpmkd6vdg4j21kw16ods9.jpg
 ---
 
 {% note info %}
@@ -18,7 +18,8 @@ cover: http://wx3.sinaimg.cn/mw690/a98da548gy1fplfmo4ozrj21400gcmyd.jpg
 
 我遇到这样一题：
 
-> 不使用`for`和`while`，实现一个函数prefill(n, v)：返回一个数组a = [v, v, ..., v]，其中含有n个v。
+> 不使用`for`和`while`，实现一个函数prefill(n, v)：
+> 返回一个数组a = [v, v, ..., v]，其中含有n个v。
 
 当时想到了用递归实现，但卡在了递归调用上。
 
@@ -263,7 +264,7 @@ console.log(F) // 11
 
 有了ES6的迭代器，我们有两种方法实现多步继发的异步编程。
 
-### Thunk函数
+### Thunk函数实现
 
 JS中的Thunk函数，我的理解就是一个柯里化：
 
