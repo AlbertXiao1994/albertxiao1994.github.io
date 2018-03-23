@@ -18,8 +18,7 @@ cover: http://wx1.sinaimg.cn/mw690/a98da548gy1fpmkd6vdg4j21kw16ods9.jpg
 
 我遇到这样一题：
 
-> 不使用`for`和`while`，实现一个函数prefill(n, v)：
-> 返回一个数组a = [v, v, ..., v]，其中含有n个v。
+> 不使用`for`和`while`，实现一个函数prefill(n, v)：返回一个数组a = [v, v, ..., v]，其中含有n个v。
 
 当时想到了用递归实现，但卡在了递归调用上。
 
