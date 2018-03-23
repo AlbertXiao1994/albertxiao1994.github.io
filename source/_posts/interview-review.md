@@ -55,6 +55,27 @@ function prefill(n, v) {
 
 prefill(5, 1) // [1, 1, 1, 1, 1]
 ```
+
+上面的解法还有些不够简洁，程序员就是要有Geek的精神：
+
+```js
+function prefill(n, v) {
+  var arr = arguments[2] || [];
+
+  if (n === 0) {
+    return arr;
+  }
+
+  arr[arr.length] = v;
+
+  return prefill(n-1, v, arr);
+}
+
+prefill(5, 1) // [1, 1, 1, 1, 1]
+```
+
+上面把函数嵌套给干掉了，代码优雅了些。
+
 递归还有一个尾递归优化，像上面的求阶乘的函数：
 
 ```js
