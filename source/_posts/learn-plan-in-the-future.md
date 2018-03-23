@@ -77,6 +77,8 @@ cover: http://wx2.sinaimg.cn/mw690/a98da548gy1fpia6x0wfjj20rs0ijdic.jpg
 
 我的想法是，深度、广度需要兼备，但我以深度为主。而深度要想加强，我所用到的技术栈的源码基本需要通读、精通。那个师兄，他就把JDK的源码都看了一遍。
 
+***
+
 ## JS进阶（3月23日新增）
 
 时间：4月1日——7月30日
@@ -90,6 +92,8 @@ cover: http://wx2.sinaimg.cn/mw690/a98da548gy1fpia6x0wfjj20rs0ijdic.jpg
 时间：5月1日——6月1日
 
 资料：W3C、博客
+
+***
 
 ## Node深入
 
