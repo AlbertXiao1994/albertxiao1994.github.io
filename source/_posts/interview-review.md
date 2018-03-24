@@ -70,7 +70,7 @@ function prefill(n, v) {
     return arr;
   }
 
-  arr[arr.length] = v;
+  arr.push(v);
 
   return prefill(n-1, v, arr);
 }
@@ -79,6 +79,23 @@ prefill(5, 1) // [1, 1, 1, 1, 1]
 ```
 
 上面把函数嵌套给干掉了，代码优雅了些。
+
+但其实，还有更优雅的方法：
+
+```js
+function prefill(n, v) {
+  if (n === 0) {
+    return [];
+  }
+  
+  var arr = prefill(n-1, v);
+  arr.push(v);
+
+  return arr;
+}
+
+prefill(5, 1) // [1, 1, 1, 1, 1]
+```
 
 ***
 
