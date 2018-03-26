@@ -47,7 +47,7 @@ class Example extends React.Component {
 
 下面说说我的理解。
 
-## 1、`this.setstate`
+## 1、this.setstate
 
 我们调用`setstate`，实际上干了这么一件事：
 
@@ -62,7 +62,7 @@ ReactComponent.prototype.setState = function(partialState, callback) {
 ```
 里面的`updater`是一个`ReactUpdateQueue`对象，它在组件初始化时被注入。
 
-## 2、 `enqueueSetState`
+## 2、 enqueueSetState
 
 它将新的局部`state`放入当前组件实例的`_pendingStateQueue`，之后调用`enqueueUpdate`：
 
@@ -90,7 +90,7 @@ enqueueSetState: function(publicInstance, partialState) {
 
 那`enqueueUpdate`函数起什么作用呢？
 
-## 3、`enqueueUpdate`
+## 3、enqueueUpdate
 
 ```js
 function enqueueUpdate(component) {
@@ -120,7 +120,7 @@ function enqueueUpdate(component) {
 
 `enqueueUpdate`注入了两个依赖，其中一个很重要的就是下面的`batchingStrategy`。
 
-## 4、`batchedUpdates`
+## 4、batchedUpdates
 
 可以看到，它有一个`isBatchingUpdates`，标志当前是否处于批量更新阶段。
 
@@ -163,8 +163,6 @@ var FLUSH_BATCHED_UPDATES = {
 
 可见，一个事务可以有多个`wrapper`，依次执行。
 
-6. `flushBatchedUpdates`
-
 ```js
 var flushBatchedUpdates = function() {
   while (dirtyComponents.length || asapEnqueued) {
@@ -188,7 +186,7 @@ var flushBatchedUpdates = function() {
 
 这个方法当`dirtyComponents`长度大于0时，执行“刷新事务”，调用`runBatchedUpdates`方法。
 
-## 6、`runBatchedUpdates`
+## 6、runBatchedUpdates
 
 ```js
 function runBatchedUpdates(transaction) {
@@ -208,7 +206,7 @@ function runBatchedUpdates(transaction) {
 
 它的核心功能是依次对“脏组件”执行`performUpdateIfNecessary`。
 
-## 7、`performUpdateIfNecessary`
+## 7、performUpdateIfNecessary
 
 ```js
 performUpdateIfNecessary: function(
@@ -224,7 +222,7 @@ performUpdateIfNecessary: function(
 
 而它其实调用实例本身的`performUpdateIfNecessary`方法。
 
-## 8、`updateComponent`
+## 8、updateComponent
 
 ```js
 performUpdateIfNecessary: function(transaction) {
@@ -251,7 +249,7 @@ performUpdateIfNecessary: function(transaction) {
 
 它核心的是`updateComponent`方法。
 
-## 9、`updateComponent`
+## 9、updateComponent
 
 ```js
 updateComponent: function(
@@ -335,7 +333,7 @@ updateComponent: function(
 
 * 通过`_processPendingState`更新`state`，根据`shouldComponentUpdate`的值决定是否调用`_pendingForceUpdate`更新组件。
 
-## 10、`_processPendingState`
+## 10、_processPendingState
 
 它是批量更新的关键：
 
@@ -439,3 +437,5 @@ dispatchEvent: function(topLevelType, nativeEvent) {
 5. [拆解setState[二][一源看世界][之React]](https://www.jianshu.com/p/d392d6bd8f05)
 
 6. [拆解setState[三][一源看世界][之React]](https://www.jianshu.com/p/3965c4bdc1ea)
+
+7. [React源码](https://github.com/facebook/react)
