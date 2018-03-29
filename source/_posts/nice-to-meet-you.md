@@ -2,7 +2,7 @@
 title: 初次见面，请多指教
 date: 2018-01-18 17:29:31
 categories:
-- 随想
+- 随笔
 cover: http://wx2.sinaimg.cn/mw690/a98da548gy1fnky27mcb5j20m80dwdig.jpg
 ---
 大家好，你们可以叫我萧文，也可以叫我Albert。
