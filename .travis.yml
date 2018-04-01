@@ -10,7 +10,7 @@ before_install:
   - export TZ='Asia/Shanghai' # 更改时区
 
 install:
-  - npm install  #安装hexo及插件
+  - npm install
 
 script:
   - hexo clean  #清除
