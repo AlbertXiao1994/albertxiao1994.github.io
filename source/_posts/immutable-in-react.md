@@ -66,7 +66,7 @@ export function is(valueA, valueB) {
 
 对于原生JS引用类型数据，则还是进行地址比较。
 
-## 尽量不要使用`fromJS()`和toJS()`
+## 尽量不要使用fromJS()和toJS()
 
 原来，我都是像下面这样使用`immutable.js`的：
 
@@ -172,7 +172,7 @@ export default function menu(state = initialState, action) {
 }
 ```
 
-### 3. 改造`mapStateToProps`
+### 3. 改造mapStateToProps
 
 ```js
 //connect
