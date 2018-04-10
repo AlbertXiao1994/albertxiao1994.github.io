@@ -4,8 +4,34 @@
 
     
   <url>
+    <loc>http://alberts.top/2018/04/10/why-is-js-framework/</loc>
+    <lastmod>2018-04-10T02:02:01.843Z</lastmod>
+    <data>
+        <display>
+        <title>为什么出现React们</title>
+        <pubTime>2018-04-10T01:14:22.000Z</pubTime>
+        
+        <tag>React</tag>
+         
+        <tag>Vue</tag>
+         
+        <tag>组件化</tag>
+         
+        <tag>VDOM</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://alberts.top/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://alberts.top/2018/03/30/immutable-in-react/</loc>
-    <lastmod>2018-04-03T16:24:22.505Z</lastmod>
+    <lastmod>2018-04-05T02:22:12.840Z</lastmod>
     <data>
         <display>
         <title>Immutable总结</title>
