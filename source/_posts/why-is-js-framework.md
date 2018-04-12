@@ -7,7 +7,7 @@ tags:
 - Vue
 - 组件化
 - VDOM
-cover: http://wx4.sinaimg.cn/mw690/a98da548gy1fq7aruyj2mj20e608ct90.jpg
+cover: http://wx3.sinaimg.cn/mw690/a98da548gy1fq7cqpxvjxj20go0bwabc.jpg
 ---
 
 {% note info %}
@@ -22,13 +22,13 @@ cover: http://wx4.sinaimg.cn/mw690/a98da548gy1fq7aruyj2mj20e608ct90.jpg
 
 从JQuery到Backbone，再到现在的React、Vue，Why？
 
-我的理解原因主要是以下三点：
+**我的理解原因主要是以下三点：**
 
-* 数据驱动视图
+* **数据驱动视图**
 
-* 组件化开发
+* **组件化开发**
 
-* 虚拟DOM
+* **虚拟DOM**
 
 ## 数据驱动视图
 
@@ -50,7 +50,7 @@ cover: http://wx4.sinaimg.cn/mw690/a98da548gy1fq7aruyj2mj20e608ct90.jpg
 
 因此，React们都采用了组件式开发的模式。
 
-* 虚拟DOM
+## 虚拟DOM
 
 虚拟DOM，是React的一个首创。Vue在2.0后也引入了它。
 
