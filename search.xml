@@ -1,6 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[better-scroll对iscroll的继承与发展]]></title>
+    <url>%2F2018%2F04%2F12%2Fbetter-scroll-and-iscroll%2F</url>
+    <content type="text"><![CDATA[前段时间的面试，给自己挖了个坑，向面试官立下flag去读源码，分析better-scroll对iscroll的发展。自己挖的坑，跪着也要填完。前几天看到篇文章，说如何正确使用开源项目。刚好，也探讨探讨开源项目的正确使用姿势。 4月12日注： 这几天，科研上在赶论文，前端学习上中断了正在学的《了不起的Node.js》，跑去翻译了新版React的部分文档，同时写了两篇博客：一篇关于流行框架的探讨，《为什么出现React们》；一篇关于React新的生命周期的理解。 源码阅读是需要一整段的时间的，预计周五+周六完成。 先占坑，明日来填。]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>better-scroll</tag>
+        <tag>iscroll</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title><![CDATA[React新的生命周期]]></title>
+    <url>%2F2018%2F04%2F12%2Fnew-react-lifecycle%2F</url>
+    <content type="text"><![CDATA[这张图非常清楚地说明了React 16.3后的生命周期： static getDerivedStateFromProps()这个新的方法的主要作用，从它的名字中能看出：从props中生成新的state。 它通过返回一个对象来更新state，而不是以前的调用setState API。如果state的更新不依赖于属性变化，那么 以前，我们要拿到新的属性，一般通过componentWillReceiveProps。现在React推荐使用getDerivedStateFromProps，而componentWillReceiveProps将在17版里移除。 从上面这个图中可以看到，它跨越了两个阶段：组件挂载和组件更新阶段。 组件挂载阶段它在组件实例后调用，用于从props中生成初始的state； 另一种情况是，父组件重新渲染了。这时，即使属性没有更新，它也会被调用。 组件更新阶段最常用的使用场景，就是组件接受新属性。 getSnapshotBeforeUpdate()从它的名字可以看出，它能够在组件更新前保存一份原组件的快照。 官方文档有这么一个例子来说明它的使用场景： 12345678910111213141516171819202122232425262728class ScrollingList extends React.Component &#123; listRef = React.createRef(); getSnapshotBeforeUpdate(prevProps, prevState) &#123; // 获取更新前的列表高度 if (prevProps.list.length &lt; this.props.list.length) &#123; // 返回更新前的值 return this.listRef.current.scrollHeight; &#125; return null; &#125; componentDidUpdate(prevProps, prevState, snapshot) &#123; // If we have a snapshot value, we've just added new items. // Adjust scroll so these new items don't push the old ones out of view. // 如在列表头部增加新项，调整scrollTop以防将旧的元素顶出视口 if (snapshot !== null) &#123; this.listRef.current.scrollTop += this.listRef.current.scrollHeight - snapshot; &#125; &#125; render() &#123; return ( &lt;div ref=&#123;this.listRef&#125;&gt;&#123;/* ...contents... */&#125;&lt;/div&gt; ); &#125;&#125; 上面的例子通过记录更新前的滚动位置并进行相应的调整，保存了界面的原始状态。 原来，有个componentWillUpdate也能在组件更新前做一些操作。 不过似乎使用它会有一些问题。官方文档举了个例子： 如果一个用户在这期间做了像改变浏览器尺寸的事，从componentWillUpdate中读出的scrollHeight值将是滞后的。 而getSnapshotBeforeUpdate()则不存在这个问题，我的理解是因为它是在最新的渲染输出提交给DOM前调用，已经是最新状态了，只是没体现在DOM上。 从上面这个新的生命周期图中也能看出，它完全可以读取“DOM”了。]]></content>
+      <categories>
+        <category>前端</category>
+      </categories>
+      <tags>
+        <tag>React</tag>
+        <tag>生命周期</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[为什么出现React们]]></title>
     <url>%2F2018%2F04%2F10%2Fwhy-is-js-framework%2F</url>
     <content type="text"><![CDATA[前端发展史上，前端框架层出不穷。如今，最流行的当属React、Vue。那为什么是它们？ 有人算过，前端框架目前还活着的有54种。了解详情 从JQuery到Backbone，再到现在的React、Vue，Why？ 我的理解原因主要是以下三点： 数据驱动视图 组件化开发 虚拟DOM 数据驱动视图原来的JQuery之类，它主要是对原生JS的一层封装。只能说是类库，还不能说是框架。框架应该提供一套解决方案。 将逻辑与UI解耦的事，Backbone们就在做。但把这事做得彻底还是现在的三巨头：React、Vue、Angular。 视图由数据驱动，开发者将只需关注变动数据，而更新视图的工作框架来帮你做。 在Vue中，通过Dep和Watcher，进行数据依赖收集和绑定视图更新方法。 在React中，当props和state变化时，重新构建虚拟DOM，通过diff比较进行视图更新。 组件化开发类库式的开发模式，将逻辑和UI耦合，使逻辑和UI都很难复用。 在大规模协作开发的背景下，组件式开发更是刚需。 因此，React们都采用了组件式开发的模式。 虚拟DOM虚拟DOM，是React的一个首创。Vue在2.0后也引入了它。 DOM是很慢的，每个节点都有很多的属性和方法。甚至连注释都是一个节点。以前，调用DOM API将会导致DOM树的重新创建，这是一件开销很大的事情。 因此，虚拟DOM应运而生，按需分配。按需分配，是共产社会的追求，也是现在各种人工智能、大数据的最终目标。 引入了虚拟DOM，使用对象来描述DOM节点，只需要更新真正变化了那部分视图，将开销降低到了最小。]]></content>
